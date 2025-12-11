@@ -4,6 +4,6 @@ import { primarySkillSchema } from "../schemas/primarySkillSchema.js";
 import { secondarySkillSchema } from "../schemas/secondarySkillSchema.js";
 
 
-export const DemandJobDetails = mongoose.model("DemandJobDetails", demandJobDetailsSchema);
-export const PrimarySkillSchema = mongoose.model("PrimarySkillSchema", primarySkillSchema);
-export const SecondarySkillSchema = mongoose.model("SecondarySkillSchema", secondarySkillSchema);
+export const DemandJobDetailsModel = mongoose.model("DemandJobDetailsModel", demandJobDetailsSchema);
+export const PrimarySkillModel = mongoose.model("PrimarySkillModel", primarySkillSchema);
+export const SecondarySkillModel = mongoose.model("SecondarySkillModel", secondarySkillSchema);

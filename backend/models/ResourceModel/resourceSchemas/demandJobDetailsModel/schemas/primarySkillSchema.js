@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const primarySkillSchema = new mongoose.Schema(
   {
-    name: {
+    Skill: {
       type: String,
       required: true,
       trim: true,
