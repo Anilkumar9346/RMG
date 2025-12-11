@@ -20,22 +20,53 @@ export const contractDetailsSchema = new mongoose.Schema(
     },
 
     workingDays: {
-      type: String,       // Example: "Mon–Fri", "6 Days", "Alternate Saturdays"
+      type: String,
       required: true,
       trim: true
     },
 
     workingTiming: {
-      type: String,       // Example: "9AM–6PM", "Night Shift", "Rotational"
+      type: String,
       required: true,
       trim: true
     },
 
     workingLocation: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "WorkingLocation",   // reference to your WorkingLocation model
+      ref: "WorkingLocation",
       required: true
+    },
+
+    workingMode: {
+      type: String,
+      required: true,
+      trim: true
+    },
+
+    laptopProvide:{
+      type:String,
+      required:true
+    },
+
+    BGV: {
+      type: String,
+      enum: ["yes", "no"],
+      required: true,
+      trim: true
+    },
+
+    clientBGV_Verify: {
+      type: String,
+      enum: ["yes", "no"],
+      required: true,
+      trim: true
+    },
+
+    BGVNote:{
+      type: String,
+      default:''
     }
+
   },
   { timestamps: true }
 );

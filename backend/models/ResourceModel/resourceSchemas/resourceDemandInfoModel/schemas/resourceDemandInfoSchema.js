@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const resourceDemandInfoSchema = new mongoose.Schema(
   {
-    demandId: {
+    uniqueId: {
       type: String,
       required: true,
       unique: true,
@@ -50,6 +50,32 @@ export const resourceDemandInfoSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
+
+    companyName: {
+      type: String,
+      required: true,
+    },
+
+    clientName: {
+      type: String,
+      required: true,
+    },
+
+    clientContact: {
+      type: String,
+      required: true,
+    },
+
+    clientContactNo: {
+      type: String,
+      default:'',
+    },
+
+    experienceLevel: {
+      type: String,
+      required: true,
+    },
+
   },
   { timestamps: true }
 );
