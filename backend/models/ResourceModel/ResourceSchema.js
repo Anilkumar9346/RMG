@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 // resource model
-export const ResourceSchema = new mongoose.Schema(
+export const resourceSchema = new mongoose.Schema(
 {
 	demandCategory: {
       type: String,
