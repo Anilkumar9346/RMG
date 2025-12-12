@@ -1,10 +1,10 @@
-import {resourceSchema} from '../../models/resourceModel/resourceModel.js'
+import {Resource} from '../../models/resourceModel/resourceModel.js'
 import {ResourceDemandInfo} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 import {DemandTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 import {DemandSubTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 
-import {CompanyDetail} from '../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {Client} from '../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {CompanyDetail} from '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {Client} from '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 //import {WorkingLocation} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 import {ContractDetails} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 
