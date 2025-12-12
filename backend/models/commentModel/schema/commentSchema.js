@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const resumeSchema = new mongoose.Schema(
+export const commentSchema = new mongoose.Schema(
 {
     resourceModelId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -8,20 +8,17 @@ export const resumeSchema = new mongoose.Schema(
       trim: true
     },
 
-    recruterId:{
+    userId:{
       type:String,
       required:true
     },
 
-    resumeRefName:{
-      type:String,
-      required:true
+    commentNote: {
+      type: String,
+      required: true,
+      trim: true
     },
 
-    resumeRefPath:{
-      type:String,
-      required:true
-    },
 
 },{ timestamps: true }
 );
