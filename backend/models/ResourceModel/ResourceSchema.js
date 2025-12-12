@@ -19,11 +19,11 @@ export const resourceSchema = new mongoose.Schema(
     
 
 
-    DemandJobDetailsID: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "DemandJobDetails",
-      trim: true
-    },
+    // DemandJobDetailsID: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "DemandJobDetails",
+    //   trim: true
+    // },
 
 
 
@@ -41,6 +41,11 @@ export const resourceSchema = new mongoose.Schema(
       trim: true
     },
 
+
+    jobDescription: {
+      type: String,
+      required: true
+    },
 
     // interview process
     modeOfInterview: {
