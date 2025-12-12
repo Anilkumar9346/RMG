@@ -34,11 +34,13 @@ export const resourceDemandInfoSchema = new mongoose.Schema(
       ref: "DemandTechnology", 
       required: true 
     },
+
     demandSubTechnology: { 
       type: mongoose.Schema.Types.ObjectId,
       ref: "DemandSubTechnology",
       required: true 
     },
+    
     demandType: { 
       type: String, 
       required: true 

@@ -10,7 +10,6 @@ export const resourceSchema = new mongoose.Schema(
     },
 
 
-
     ContractDetailsId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ContractDetails",

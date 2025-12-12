@@ -50,16 +50,16 @@ export const contractDetailsSchema = new mongoose.Schema(
 
     BGV: {
       type: String,
-      enum: ["yes", "no"],
-      required: true,
-      trim: true
+      enum: ["Yes", "No"],
+      trim: true,
+      default:"No"
     },
 
     clientBGV_Verify: {
       type: String,
-      enum: ["yes", "no"],
-      required: true,
-      trim: true
+      enum: ["Yes", "No"],
+      trim: true,
+      default:"No"
     },
 
     BGVNote:{
