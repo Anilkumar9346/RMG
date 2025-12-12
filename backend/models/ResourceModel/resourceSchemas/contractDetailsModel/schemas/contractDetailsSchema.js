@@ -32,8 +32,7 @@ export const contractDetailsSchema = new mongoose.Schema(
     },
 
     workingLocation: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "WorkingLocation",
+      type: String,
       required: true
     },
 

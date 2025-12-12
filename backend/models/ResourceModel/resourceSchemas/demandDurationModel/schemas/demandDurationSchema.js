@@ -10,7 +10,7 @@ export const demandDurationSchema = new mongoose.Schema({
     required: true
   },
   tentativeDuration: {
-    type: String, // or Number depending on how you want to store duration
+    type: String,
     required: true
   },
   note: {
@@ -22,4 +22,4 @@ export const demandDurationSchema = new mongoose.Schema({
     required: true,
     unique: true
   }
-}, { timestamps: true }); // optional timestamps for createdAt & updatedAt
+}, { timestamps: true });

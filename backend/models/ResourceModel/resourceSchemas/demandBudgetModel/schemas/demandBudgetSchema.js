@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 export const demandBudgetSchema = new mongoose.Schema({
+  uniqueId: {
+    type: String,
+    required: true,
+    trim: true
+  },
   budgetType: {
     type: String,
     required: true,
