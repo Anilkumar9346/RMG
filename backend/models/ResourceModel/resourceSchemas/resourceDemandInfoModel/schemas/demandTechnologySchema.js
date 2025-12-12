@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const demandTechnologySchema = new mongoose.Schema(
   {
-    name: {
+    demandTechnologyName: {
       type: String,
       required: true,
       trim: true,

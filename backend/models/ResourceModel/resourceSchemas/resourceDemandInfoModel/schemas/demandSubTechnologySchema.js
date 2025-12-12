@@ -2,15 +2,14 @@ import mongoose from "mongoose";
 
 export const demandSubTechnologySchema = new mongoose.Schema(
   {
-    name: {
+    demandSubTechnologyName: {
       type: String,
       required: true,
       trim: true,
     },
 
-    technologyId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "DemandTechnology",
+    uniqueId: {
+      type: String,
       required: true,
     },
 

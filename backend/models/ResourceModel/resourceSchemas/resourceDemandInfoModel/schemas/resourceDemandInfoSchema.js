@@ -2,78 +2,53 @@ import mongoose from "mongoose";
 
 export const resourceDemandInfoSchema = new mongoose.Schema(
   {
-    uniqueId: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true
+    uniqueId: { 
+      type: String, 
+      required: true, 
+      unique: true 
     },
 
     demandCategory: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    noOfResource: {
-      type: Number,
-      required: true,
-      min: 1
-    },
-
-    demandLevel: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    engagement: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    demandTechnology: {
-      type: String,
+      type: String, 
       required: true
     },
 
-    demandSubTechnology: {
-      type: String,
+    noOfResource: { 
+      type: Number, 
+      required: true, 
+      min: 1 
+    },
+
+    demandLevel: { 
+      type: String, 
+      required: true 
+    },
+
+    engagement: { 
+      type: String, 
+      required: true 
+    },
+    
+    demandTechnology: { 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "DemandTechnology", 
+      required: true 
+    },
+    demandSubTechnology: { 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "DemandSubTechnology",
+      required: true 
+    },
+    demandType: { 
+      type: String, 
+      required: true 
+    },
+
+    companyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Client",
       required: true
     },
-
-    demandType: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    companyName: {
-      type: String,
-      required: true,
-    },
-
-    clientName: {
-      type: String,
-      required: true,
-    },
-
-    clientContact: {
-      type: String,
-      required: true,
-    },
-
-    clientContactNo: {
-      type: String,
-      default:'',
-    },
-
-    experienceLevel: {
-      type: String,
-      required: true,
-    },
-
   },
   { timestamps: true }
 );

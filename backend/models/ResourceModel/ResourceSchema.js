@@ -1,196 +1,43 @@
 import mongoose from "mongoose";
+
 // resource model
 export const resourceSchema = new mongoose.Schema(
 {
-	demandCategory: {
-      type: String,
-      required: true,
+	  resourceDemandInfoId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ResourceDemandInfo",
       trim: true
     },
 
-    noOfResource: {
-      type: Number,
-      required: true,
-      min: 1
-    },
 
-    demandLevel: {
-      type: String,
-      required: true,
+
+    ContractDetailsId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ContractDetails",
+      trim: true
+    },
+    
+
+
+    DemandJobDetailsID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "DemandJobDetails",
       trim: true
     },
 
-    engagement: {
-      type: String,
-      required: true,
+
+
+    DemandDurationId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "DemandDuration",
       trim: true
     },
 
-    demandTechnology: {
-      type: String,
-      required: true
-    },
-
-    demandSubTechnology: {
-      type: String,
-      required: true
-    },
-
-    demandType: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    companyName: {
-      type: String,
-      required: true,
-    },
-
-    clientName: {
-      type: String,
-      required: true,
-    },
-
-    clientContact: {
-      type: String,
-      required: true,
-    },
-
-    clientContactNo: {
-      type: String,
-      default:'',
-    },
-
-    experienceLevel: {
-      type: String,
-      required: true,
-    },
 
 
-    clientNeed: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    contractType: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    workingDays: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    workingTiming: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    workingLocation: {
-      type: String,
-      required: true
-    },
-
-    workingMode: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
-    laptopProvide:{
-      type:String,
-      required:true
-    },
-
-    BGV: {
-      type: String,
-      enum: ["yes", "no"],
-      required: true,
-      trim: true
-    },
-
-    clientBGV_Verify: {
-      type: String,
-      enum: ["yes", "no"],
-      required: true,
-      trim: true
-    },
-
-    BGVNote:{
-      type: String,
-      default:''
-    },
-
-
-    primarySkill: {
-      type: String,
-      required: true
-    },
-
-    secondarySkill: {
-      type: String,
-      required: true
-    },
-
-    jobDescription: {
-      type: String,
-      required: true
-    },
-
-
-    billingStartDate: {
-      type: Date,
-      required: true
-    },
-    billingEndDate: {
-      type: Date,
-      required: true
-    },
-    tentativeDuration: {
-      type: String,
-      required: true
-    },
-    note: {
-      type: String,
-      default: ""
-    },
-
-
-    budgetType: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    billingStartDate: {
-      type: Date,
-      required: true
-    },
-    currency: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    note: {
-      type: String,
-      default: ""
-    },
-    budget: {
-      type: Number,
-      required: true
-    },
-    profitMargin: {
-      type: Number,
-      required: true
-    },
-    payoutType: {
-      type: String,
-      required: true,
+    DemandBudgetId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "DemandBudget",
       trim: true
     },
 
