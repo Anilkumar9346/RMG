@@ -7,13 +7,11 @@ export const workingLocationSchema = new mongoose.Schema(
       required: true,
       unique: true
     },
-    name: {
+    location: {
       type: String,
       required: true,
-      trim: true,
-      unique: true
     },
-
+    
     description: {
       type: String,
       default: ""

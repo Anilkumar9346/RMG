@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
-import { type } from "os";
-import { stringify } from "querystring";
 
-export const companySchema = new mongoose.Schema(
+export const companyDetailSchema = new mongoose.Schema(
   {
     companyName: {
       type: String,
@@ -10,21 +8,16 @@ export const companySchema = new mongoose.Schema(
       trim: true,
     },
 
-    clientName: {
+    companyLinkedId: {
       type: String,
       required: true,
       trim: true,
     },
 
-    clientContact: {
+    companyAddress: {
       type: String,
       required: true,
       trim: true,
-    },
-
-    experienceLevel:{
-      type:String,
-      require:true,
     },
 
     CompanyId: {

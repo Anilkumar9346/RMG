@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 
 export const demandJobDetailsSchema = new mongoose.Schema({
-  primaryId: {
+  primarySkillId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Skill", // Reference to the Skill collection
+    ref: "PrimarySkill",
     required: true
   },
-  secondarySkill: {
-    type: String,
+  secondarySkillId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "SecondarySkill",
     required: true
   },
   jobDescription: {

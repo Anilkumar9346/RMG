@@ -16,8 +16,7 @@ export const secondarySkillSchema = new mongoose.Schema(
     },
 
     secondaryUniqueId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "DemandTechnology",
+      type: String,
       required: true,
     },
   },

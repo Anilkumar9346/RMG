@@ -7,6 +7,7 @@ export const contractDetailsSchema = new mongoose.Schema(
       required: true,
       unique: true
     },
+
     clientNeed: {
       type: String,
       required: true,
@@ -31,8 +32,9 @@ export const contractDetailsSchema = new mongoose.Schema(
       trim: true
     },
 
-    workingLocation: {
-      type: String,
+    workingLocationId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "WorkingLocation",
       required: true
     },
 
