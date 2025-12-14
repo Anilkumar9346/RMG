@@ -14,12 +14,6 @@ export const companyDetailSchema = new mongoose.Schema(
       trim: true,
     },
 
-    companyAddress: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-
     CompanyId: {
       type: String,
       required: true,

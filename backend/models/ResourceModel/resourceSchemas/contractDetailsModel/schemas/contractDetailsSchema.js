@@ -32,7 +32,7 @@ export const contractDetailsSchema = new mongoose.Schema(
       trim: true
     },
 
-    workingLocation: {
+    workingLocation: {//location
       type: String,
       required: true
     },
@@ -49,17 +49,17 @@ export const contractDetailsSchema = new mongoose.Schema(
     },
 
     BGV: {
-      type: String,
-      enum: ["Yes", "No"],
-      trim: true,
-      default:"No"
+      type: Boolean,
+      enum: ["yes", "no"],
+      required: true,
+      trim: true
     },
 
     clientBGV_Verify: {
-      type: String,
-      enum: ["Yes", "No"],
-      trim: true,
-      default:"No"
+      type: Boolean,
+      enum: ["yes", "no"],
+      required: true,
+      trim: true
     },
 
     BGVNote:{

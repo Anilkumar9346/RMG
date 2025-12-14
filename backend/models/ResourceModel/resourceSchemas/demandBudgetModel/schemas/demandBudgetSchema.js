@@ -34,7 +34,6 @@ export const demandBudgetSchema = new mongoose.Schema({
   },
   payoutType: {
     type: String,
-    required: true,
     trim: true
   }
 }, { timestamps: true });

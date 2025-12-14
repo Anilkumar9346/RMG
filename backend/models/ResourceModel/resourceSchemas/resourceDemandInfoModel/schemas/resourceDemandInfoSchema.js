@@ -8,7 +8,7 @@ export const resourceDemandInfoSchema = new mongoose.Schema(
       unique: true 
     },
 
-    demandCategory: {
+    demandCategory: {//change
       type: String, 
       required: true
     },
@@ -19,12 +19,12 @@ export const resourceDemandInfoSchema = new mongoose.Schema(
       min: 1 
     },
 
-    demandLevel: { 
+    demandLevel: { //change
       type: String, 
       required: true 
     },
 
-    engagement: { 
+    engagement: { //change
       type: String, 
       required: true 
     },
@@ -41,7 +41,7 @@ export const resourceDemandInfoSchema = new mongoose.Schema(
       required: true 
     },
     
-    demandType: { 
+    demandType: { //change
       type: String, 
       required: true 
     },
