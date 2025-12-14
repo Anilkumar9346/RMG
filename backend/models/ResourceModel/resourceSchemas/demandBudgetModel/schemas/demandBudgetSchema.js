@@ -20,7 +20,7 @@ export const demandBudgetSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  note: {
+  demandBudgetNote: {
     type: String,
     default: ""
   },

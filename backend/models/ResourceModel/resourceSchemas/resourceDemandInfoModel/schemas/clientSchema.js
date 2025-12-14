@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const clientSchema = new mongoose.Schema(
   {
-    companyName: {
+    companyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "CompanyDetail",
       trim: true,
