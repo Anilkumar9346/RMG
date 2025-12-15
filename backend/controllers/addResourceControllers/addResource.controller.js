@@ -27,7 +27,7 @@ export const addResourceController = async (req, res) => {
     demandBudgetInfo,
     demandInterviewDetails,
     companyDetails,
-    clientDetails
+    clientDetails  
   } = req.body;
 
   const addResourceObj = {
