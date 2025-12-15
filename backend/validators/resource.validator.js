@@ -105,4 +105,7 @@ export const addResourceValidator = [
 
   body("demandInterviewDetails.requirementResource")
     .notEmpty().withMessage("Requirement Resource is required"),
+
+  body("demandInterviewDetails.nameOfTheSalesPerson")
+    .notEmpty().withMessage("nameOfTheSalesPerson  is required"),
 ];
