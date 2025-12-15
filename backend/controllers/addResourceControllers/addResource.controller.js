@@ -25,7 +25,8 @@ export const addResourceController = async (req, res) => {
     demandJobDetails,
     demandDurationInfo,
     demandBudgetInfo,
-    demandInterviewDetails
+    demandInterviewDetails,
+    companyDetails
   } = req.body;
 
   const addResourceObj = {
@@ -77,6 +78,10 @@ export const addResourceController = async (req, res) => {
       "contractToHire": true,
       "paymentConfirmation": true,
       "requirementResource": "Immediate"
+    },
+    "companyDetails":{
+      "companyName":"PayPal",
+      "companyLinkedId":"erv679bclwerttewg"
     }
   }
 
@@ -227,6 +232,7 @@ export const addResourceController = async (req, res) => {
 
 
     // If Everythig is Good then 
+
     return res.json({message : "Resource Added Successfully"})
 
   } catch (error) {

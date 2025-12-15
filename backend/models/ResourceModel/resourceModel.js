@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { resourceSchema } from "./resourceSchema";
+import { resourceSchema } from "./ResourceSchema.js";
 
 // Resource Demand Info Model
 export const Resource = mongoose.model(

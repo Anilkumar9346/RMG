@@ -1,8 +1,8 @@
 import express from "express"
 
-import { addResourceValidator } from "../validators/resource.validator";
-import { validate } from "../middlewares/validate.middleware";
-import { addResourceController } from "../controllers/addResourceControllers/addResource.Controller";
+import { addResourceValidator } from "../validators/resource.validator.js";
+import { validate } from "../middlewares/validate.middleware.js";
+import { addResourceController } from "../controllers/addResourceControllers/addResource.controller.js";
 
 const router = express.Router();
 
