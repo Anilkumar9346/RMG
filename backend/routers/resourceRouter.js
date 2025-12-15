@@ -6,7 +6,7 @@ import { addResourceController } from "../controllers/addResourceControllers/add
 
 const router = express.Router();
 
-// router.post("/add-resource", addResourceValidator, validate, addResourceController);
+router.post("/add-resource", addResourceValidator, validate, addResourceController);
 
 // resourceRouter.post('/api/resourceRouter',);
 

@@ -8,12 +8,6 @@ export const demandTechnologySchema = new mongoose.Schema(
       trim: true,
       unique: true
     },
-
-    technologyId: {
-      type: String,
-      default: "",
-      required: true
-    }
   },
   { timestamps: true }
 );

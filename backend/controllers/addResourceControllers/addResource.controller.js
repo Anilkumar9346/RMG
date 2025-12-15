@@ -18,105 +18,38 @@ import {DemandBudget} from '../../models/resourceModel/resourceSchemas/demandBud
 export const addResourceController = async (req, res) => {
 
   try {
+        const {
+          resourceDemandInfo,
+          contractDetails,
+          demandJobDetails,
+          demandDurationInfo,
+          demandBudgetInfo,
+          demandInterviewDetails,
+          companyDetails,
+          clientDetails  
+        } = req.body;
 
-  const {
-    resourceDemandInfo,
-    contractDetails,
-    demandJobDetails,
-    demandDurationInfo,
-    demandBudgetInfo,
-    demandInterviewDetails,
-    companyDetails,
-    clientDetails  
-  } = req.body;
+        const companyId=await companyCreated(companyDetails)
+        const clientID=await clientCreated(clientDetails,companyId?._id)
 
-  const addResourceObj = {
-    "resourceDemandInfo": {
-      "demandCategory": "IT",
-      "noOfResource": 3,
-      "demandLevel": "Senior",
-      "engagement": "Full Time",
-      "demandTechnologyName": "Node.js",
-      "demandSubTechnologyName": "Express.js",
-      "demandType": "Contract"
-    },
 
-    "contractDetails": {
-      "clientNeed": "Immediate",
-      "contractType": "Full Time",
-      "workingDays": 5,
-      "workingTiming": "9AM - 6PM",
-      "workingLocation": "Remote"
-    },
+        const demandTechnologyId=await demandTechnologyCreated(resourceDemandInfo?.demandTechnologyName)
+        const demandSubTechnologyId=await demandSubTechnologyCreated(resourceDemandInfo?.demandSubTechnologyName,demandTechnologyId?._id)
 
-    "demandJobDetails": {
-      "jobDescription": "Looking for an experienced Node.js developer with strong backend skills."
-    },
 
-    "demandDurationInfo": {
-      "billingStartDate": "2025-01-01",
-      "billingEndDate": "2025-06-30",
-      "tentativeDuration": "6 Months",
-      "demandDurationNote": "Extendable based on performance",
-      "uniqueId": "DEM-00123"
-    },
+        const resourceDemandInfoID=await resourceDemandInfoCreated(resourceDemandInfo,demandTechnologyId,demandSubTechnologyId,clientID)
 
-    "demandBudgetInfo": {
-      "budgetType": "Monthly",
-      "demandBudgetBillingStartDate": "2025-01-01",
-      "currency": "INR",
-      "demandBudgetNote": "Budget is flexible",
-      "budget": 150000,
-      "profitMargin": 20,
-      "payoutType": "Monthly"
-    },
 
-    "demandInterviewDetails": {
-      "modeOfInterview": "Online",
-      "interviewNote": "Technical + HR rounds",
-      "budgetStatus": "Approved",
-      "techProfile": "Backend Developer",
-      "contractToHire": true,
-      "paymentConfirmation": true,
-      "requirementResource": "Immediate"
-    },
-    "companyDetails":{
-      "companyName":"PayPal",
-      "companyLinkedId":"erv679bclwerttewg"
-    },
-    "clientDetails":{
-      "clientName":"Stripe",
-      "clientContact":"345678765",
-      "experienceLevel":"6 Years"
-    }
-  }
-
-    // const {
-    //   // ResourceDemandInfo
-    //   demandCategory,
-    //   noOfResource,
-    //   demandLevel,
-    //   engagement,
-
-    //   // DemandTechnology
-    //   demandTechnologyName,
+    // Sub Technology
+    // const newDemandSubTechnology = new DemandSubTechnology({
     //   demandSubTechnologyName,
-    //   demandType,
+    //   uniqueId,
+    //   technologyParentId: newDemandTechnology._id,
+    // });
 
-    //   // Company Details
-    //   companyName,
-    //   companyLinkedId,
-    //   companyAddress,
-    //   CompanyId,
-
-    //   // Client details
-    //   companyId,
-    //   clientName,
-    //   clientContact,
-    //   experienceLevel,
-    //   clientId,
-
-    //   // Contract details
+    // Contract Details
+    // const newContractDetails = new ContractDetails({
+    //   uniqueId: "abc",
     //   clientNeed,
     //   contractType,
     //   workingDays,
@@ -127,15 +60,20 @@ export const addResourceController = async (req, res) => {
     //   BGV,
     //   clientBGV_Verify,
     //   BGVNote,
+    // });
 
-    //   // Demand duration
+    // // Demand Duration
+    // const newDemandDuration = new DemandDuration({
     //   demandStartDate,
     //   demandEndDate,
     //   tentativeDuration,
     //   demandDurationNote,
     //   uniqueId,
+    // });
 
-    //   // Budget Information
+    // // Budget
+    // const newDemandBudget = new DemandBudget({
+    //   uniqueId,
     //   budgetType,
     //   billingStartDate,
     //   currency,
@@ -143,101 +81,25 @@ export const addResourceController = async (req, res) => {
     //   budget,
     //   profitMargin,
     //   payoutType,
+    // });
 
-    //   // Misc
-    //   jobDescription,
-    //   modeOfInterview,
-    //   interviewNote,
-    //   budgetStatus,
-    //   techProfile,
-    //   contractToHire,
-    //   paymentConfirmation,
-    //   requirementResource,
-    //   nameOfTheSalePersion,
-    // } = req.body;
-
-
-    // Demand Technology
-    const newDemandTechnology = new DemandTechnology({
-      demandTechnologyName,
-      technologyId: "abc",
-    });
-
-    // Sub Technology
-    const newDemandSubTechnology = new DemandSubTechnology({
-      demandSubTechnologyName,
-      uniqueId,
-      technologyParentId: newDemandTechnology._id,
-    });
-
-    // Contract Details
-    const newContractDetails = new ContractDetails({
-      uniqueId: "abc",
-      clientNeed,
-      contractType,
-      workingDays,
-      workingTiming,
-      workingLocation,
-      workingMode,
-      laptopProvide,
-      BGV,
-      clientBGV_Verify,
-      BGVNote,
-    });
-
-    // Demand Duration
-    const newDemandDuration = new DemandDuration({
-      demandStartDate,
-      demandEndDate,
-      tentativeDuration,
-      demandDurationNote,
-      uniqueId,
-    });
-
-    // Budget
-    const newDemandBudget = new DemandBudget({
-      uniqueId,
-      budgetType,
-      billingStartDate,
-      currency,
-      demandBudgetNote,
-      budget,
-      profitMargin,
-      payoutType,
-    });
-
-    // Company Details
-    const NewCompanyDetail = new CompanyDetail({
-      companyName,
-      companyLinkedId,
-      companyAddress,
-      CompanyId,
-    });
-
-    // Client
-    const NewClient = new Client({
-      companyId,
-      clientName,
-      clientContact,
-      experienceLevel,
-      clientId,
-    });
+    
 
     // Resource Demand Info
-    const NewResourceDemandInfo = new ResourceDemandInfo({
-      demandCategory,
-      noOfResource,
-      demandLevel,
-      engagement,
-      demandSubTechnologyName: newDemandTechnology._id,
-      demandSubTechnology: newDemandSubTechnology._id,
-      demandType,
-      companyId: NewCompanyDetail._id,
-      uniqueId: "abc",
-    });
+    // const NewResourceDemandInfo = new ResourceDemandInfo({
+    //   demandCategory,
+    //   noOfResource,
+    //   demandLevel,
+    //   engagement,
+    //   demandSubTechnologyName: newDemandTechnology._id,
+    //   demandSubTechnology: newDemandSubTechnology._id,
+    //   demandType,
+    //   companyId: NewCompanyDetail._id,
+    //   uniqueId: "abc",
+    // });
 
 
-    // If Everythig is Good then 
+    // // If Everythig is Good then 
 
     return res.json({message : "Resource Added Successfully"})
 
@@ -246,6 +108,133 @@ export const addResourceController = async (req, res) => {
       { messsage: "Adding Resource Failed ", error: error.message }
     );
   }
+};
+
+//company created
+const companyCreated=async(obj)=>{
+  try {
+    // generate a random id
+    const companyId=generateRandomId(obj.companyName)
+    // Company Details
+    const newCompanyDetail = new CompanyDetail({
+      ...obj,
+      companyId
+    });
+
+    // Save to MongoDB
+    const savedCompany = await newCompanyDetail.save();
+
+    return savedCompany;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//client created
+const clientCreated=async(obj,companyId)=>{
+  try {
+    // generate a random id
+    const clientId=generateRandomId(obj.clientName)
+    // client Details
+    const newClientDetail = new Client({
+      ...obj,
+      companyId,
+      clientId
+    });
+
+    // Save to MongoDB
+    const savedClient = await newClientDetail.save();
+
+    return savedClient;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//demand tech created
+const demandTechnologyCreated=async(obj)=>{
+  try {
+    // demand tech Details
+    const newDemandTechnology = new DemandTechnology({
+      demandSubTechnologyName:obj
+    });
+
+    // Save to MongoDB
+    const savedNewDemandTechnology = await newDemandTechnology.save();
+
+    return savedNewDemandTechnology;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//demand sub tech created
+const demandSubTechnologyCreated=async(obj,id)=>{
+  try {
+    // demand sub tech Details
+    const newDemandSubTechnology = new DemandSubTechnology({
+      demandSubTechnologyName:obj,
+      demandTechnologyId:id
+    });
+
+    // Save to MongoDB
+    const savedNewDemandSubTechnology = await newDemandSubTechnology.save();
+
+    return savedNewDemandSubTechnology;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+//resourceDemandInfo created
+const resourceDemandInfoCreated=async(obj,demandTechnology,demandSubTechnology,clientId)=>{
+  try {
+    // resourceDemandInfoDetails
+    const newResourceDemandInfo = new ResourceDemandInfo({
+      demandTechnology,
+      demandSubTechnology,
+      clientId,
+      engagement:obj.engagement,
+      demandLevel:obj.demandLevel,
+      noOfResource:obj.noOfResource,
+      demandCategory:obj.demandCategory,
+    });
+
+    // Save to MongoDB
+    const savedNewresourceDemandInfo = await newResourceDemandInfo.save();
+
+    return savedNewresourceDemandInfo;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const generateRandomId = (companyName) => {
+  const now = new Date();
+
+  // Company part (first 3 letters)
+  const companyPart = companyName
+    .replace(/\s+/g, "")
+    .toUpperCase()
+    .slice(0, 3)
+    .padEnd(3, "X");
+
+  // Date parts
+  const day = String(now.getDate()).padStart(2, "0");
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const year = now.getFullYear();
+
+  // Time (HHMM)
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  // Random alphabet
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const randomAlpha =
+    alphabet[Math.floor(Math.random() * alphabet.length)];
+
+  return `${companyPart}${day}${month}${year}${randomAlpha}${hours}${minutes}`;
 };
 
 
