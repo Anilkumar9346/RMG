@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const resourceDemandInfoSchema = new mongoose.Schema(
   {
-    uniqueId: { 
+    resourceInfoId: { 
       type: String, 
       required: true, 
       unique: true 
