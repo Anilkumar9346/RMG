@@ -34,4 +34,5 @@ export const addResourceValidator = [
   body("demandBudgetNote").notEmpty().withMessage("DemandBudgetNote is required"),
   body("billingStartDate").notEmpty().withMessage("BillingStartDate is required"),
   body("billingStartDate").notEmpty().withMessage("BillingStartDate is required"),
+  body("billingStartDate").notEmpty().withMessage("BillingStartDate is required"),
 ];  
