@@ -8,7 +8,7 @@ export const demandSubTechnologySchema = new mongoose.Schema(
       trim: true,
     },
 
-    demandTechnologyId: {
+    demandTechnologyId: { 
       type: mongoose.Schema.Types.ObjectId,
       ref: "DemandTechnology",
       required: true,

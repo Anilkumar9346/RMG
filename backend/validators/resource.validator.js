@@ -41,6 +41,18 @@ export const addResourceValidator = [
   body("contractDetails.workingLocation")
     .notEmpty().withMessage("Working Location is required"),
 
+  body("contractDetails.workingMode")
+    .notEmpty().withMessage("workingMode  is required"),
+
+  body("contractDetails.laptopProvideBy")
+    .notEmpty().withMessage("laptopProvideBy field  is required"),
+
+  body("contractDetails.isBGVRequired")
+    .notEmpty().withMessage("isBGVRequired is required"),  
+
+  body("contractDetails.clientBGV_Verify")
+  .notEmpty().withMessage("clientBGV_Verify is required"),
+
   //Demand Job Validation
   body("demandJobDetails.jobDescription")
     .notEmpty().withMessage("Job Description is required")
