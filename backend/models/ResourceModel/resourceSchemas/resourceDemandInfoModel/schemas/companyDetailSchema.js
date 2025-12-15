@@ -14,7 +14,7 @@ export const companyDetailSchema = new mongoose.Schema(
       trim: true,
     },
 
-    CompanyId: {
+    companyId: {
       type: String,
       required: true,
     },
