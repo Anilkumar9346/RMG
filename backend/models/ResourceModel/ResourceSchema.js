@@ -3,6 +3,12 @@ import mongoose from "mongoose";
 // resource model
 export const resourceSchema = new mongoose.Schema(
 {
+    resourceId:{
+      type: String,
+      required: true,
+      trim: true
+    },
+    
 	  resourceDemandInfoId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ResourceDemandInfo",
