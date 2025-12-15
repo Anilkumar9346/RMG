@@ -1,8 +1,10 @@
+
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import { resourceRouter } from "./routers/resourceRouter.js";
+import { userRouter } from "./models/userModel/userRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -15,6 +17,8 @@ app.use(express.json());
 
 // resourceRouter
 app.use("/api/resource", resourceRouter);
+app.use("/api/user", userRouter);
+
 
 const PORT = process.env.PORT || 5000;
 
