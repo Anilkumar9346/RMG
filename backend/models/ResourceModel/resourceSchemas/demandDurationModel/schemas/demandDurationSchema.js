@@ -19,7 +19,7 @@ export const demandDurationSchema = new mongoose.Schema({
     default: ""
   },
 
-  uniqueId: {
+  demandDurationId: {
     type: String,
     required: true,
     unique: true

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const demandBudgetSchema = new mongoose.Schema({
-  uniqueId: {
+  demandBudgetId: {
     type: String,
     required: true,
     trim: true

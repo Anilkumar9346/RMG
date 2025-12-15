@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const contractDetailsSchema = new mongoose.Schema(
   {
-    uniqueId: {
+    contractDetailsId: {
       type: String,
       required: true,
       unique: true
@@ -43,12 +43,12 @@ export const contractDetailsSchema = new mongoose.Schema(
       trim: true
     },
 
-    laptopProvide:{
+    laptopProvideBy:{
       type:String,
       required:true
     },
 
-    BGV: {
+    isBGVRequired: {
       type: Boolean,
       enum: ["yes", "no"],
       required: true,
