@@ -8,7 +8,7 @@ export const resourceSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
-
+    
 	  resourceDemandInfoId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ResourceDemandInfo",
@@ -16,7 +16,7 @@ export const resourceSchema = new mongoose.Schema(
     },
 
 
-    contractDetailsId: {
+    ContractDetailsId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ContractDetails",
       trim: true
@@ -32,7 +32,7 @@ export const resourceSchema = new mongoose.Schema(
 
 
 
-    demandDurationId: {
+    DemandDurationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "DemandDuration",
       trim: true
@@ -40,7 +40,7 @@ export const resourceSchema = new mongoose.Schema(
 
 
 
-    demandBudgetId: {
+    DemandBudgetId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "DemandBudget",
       trim: true
@@ -97,7 +97,7 @@ export const resourceSchema = new mongoose.Schema(
 
 
     // name detail of sale persion
-    nameOfTheSalesPerson: {
+    nameOfTheSalePersion: {
       type: String,
       required: true,
       trim: true
