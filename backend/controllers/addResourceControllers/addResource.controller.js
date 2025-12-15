@@ -127,11 +127,14 @@ const createdDemandSubTechnology=async(obj,id)=>{
 //resourceDemandInfo created
 const createdResourceDemandInfo=async(obj,demandTechnology,demandSubTechnology,clientId)=>{
   try {
+    // generate a random id
+    const resourceInfoId=generateRandomId('RIN')
     // resourceDemandInfoDetails
     const newResourceDemandInfo = new ResourceDemandInfo({
       demandTechnology,
       demandSubTechnology,
       clientId,
+      resourceInfoId,
       ...obj
       // engagement:obj.engagement,
       // demandLevel:obj.demandLevel,
