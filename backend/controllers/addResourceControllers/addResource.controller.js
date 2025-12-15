@@ -15,263 +15,22 @@ import {DemandBudget} from '../../models/resourceModel/resourceSchemas/demandBud
 
 // creating rerource 
 
-export const addResourceController = async (req, res) => {
-
-try {
-      const {
-        resourceDemandInfo,
-        contractDetails,
-        demandJobDetails,
-        demandDurationInfo,
-        demandBudgetInfo,
-        demandInterviewDetails,
-        companyDetails,
-        clientDetails   
-
-      } = req.body;
-      const companyId = await createdCompany(companyDetails)
-      const clientID = await createdClient(clientDetails,companyId?._id)
-      const demandTechnologyId = await createdDemandTechnology(resourceDemandInfo?.demandTechnologyName)
-      const demandSubTechnologyId = await createdDemandSubTechnology(resourceDemandInfo?.demandSubTechnologyName,demandTechnologyId?._id)
-      const resourceDemandInfoId = await createdResourceDemandInfo(resourceDemandInfo,demandTechnologyId,demandSubTechnologyId,clientID)
-      const contractDetailsId = await createdContractDetails(contractDetails)
-      const demandBudgetId = await createdDemandBudget(demandBudgetInfo)
-      const demandDurationId = await createdDemandDuration(demandDurationInfo)
-
-      const resource = await createdResource(resourceDemandInfoId,contractDetailsId,demandBudgetId,demandDurationId,demandJobDetails,demandInterviewDetails)
-      console.log(resource)
-  return res.json({message : "Resource Added Successfully"})
-} catch (error) {
-  return res.json(
-    { messsage: "Adding Resource Failed ", error: error.message }
-  );
-}};
-
-//company created
-const createdCompany=async(obj)=>{
-  try {
-    // generate a random id
-    const companyId=generateRandomId(obj.companyName)
-    // Company Details
-    const newCompanyDetail = new CompanyDetail({
-      ...obj,
-      companyId
-    });
-
-    // Save to MongoDB
-    const savedCompany = await newCompanyDetail.save();
-
-    return savedCompany;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-//client created
-const createdClient=async(obj,companyId)=>{
-  try {
-    // generate a random id
-    const clientId=generateRandomId(obj.clientName)
-    // client Details
-    const newClientDetail = new Client({
-      ...obj,
-      companyId,
-      clientId
-    });
-
-    // Save to MongoDB
-    const savedClient = await newClientDetail.save();
-
-    return savedClient;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-//demand tech created
-const createdDemandTechnology=async(obj)=>{
-  try {
-    // demand tech Details
-    const newDemandTechnology = new DemandTechnology({
-      demandTechnologyName:obj
-    });
-
-    // Save to MongoDB
-    const savedNewDemandTechnology = await newDemandTechnology.save();
-
-    return savedNewDemandTechnology;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-//demand sub tech created
-const createdDemandSubTechnology=async(obj,id)=>{
-  try {
-    // demand sub tech Details
-    const newDemandSubTechnology = new DemandSubTechnology({
-      demandSubTechnologyName:obj,
-      demandTechnologyId:id
-    });
-
-    // Save to MongoDB
-    const savedNewDemandSubTechnology = await newDemandSubTechnology.save();
-
-    return savedNewDemandSubTechnology;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-//resourceDemandInfo created
-const createdResourceDemandInfo=async(obj,demandTechnology,demandSubTechnology,clientId)=>{
-  try {
-    // generate a random id
-    const resourceInfoId=generateRandomId('RIN')
-    // resourceDemandInfoDetails
-    const newResourceDemandInfo = new ResourceDemandInfo({
-      demandTechnology,
-      demandSubTechnology,
-      clientId,
-      resourceInfoId,
-      ...obj
-      // engagement:obj.engagement,
-      // demandLevel:obj.demandLevel,
-      // noOfResource:obj.noOfResource,
-      // demandCategory:obj.demandCategory,
-    });
-
-    // Save to MongoDB
-    const savedNewresourceDemandInfo = await newResourceDemandInfo.save();
-
-    return savedNewresourceDemandInfo;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-//contractDetails created
-const createdContractDetails=async(obj)=>{
-  try {
-    // generate a random id
-    const contractDetailsId=generateRandomId(obj.clientNeed)
-    
-    // ContractDetails Details
-    const newContractDetails = new ContractDetails({
-      ...obj,
-      contractDetailsId
-    });
-
-    // Save to MongoDB
-    const savedNewContractDetails = await newContractDetails.save();
-
-    return savedNewContractDetails;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-//demandBudget created
-const createdDemandBudget=async(obj)=>{
-  try {
-    // generate a random id
-    const demandBudgetId=generateRandomId(obj.budgetType)
-    
-    // demandBudget Details
-    const newDemandBudget = new DemandBudget({
-      ...obj,
-      demandBudgetId
-    });
-
-    // Save to MongoDB
-    const savedNewDemandBudget = await newDemandBudget.save();
-
-    return savedNewDemandBudget;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-//demandDuration created
-const createdDemandDuration=async(obj)=>{
-  try {
-    // generate a random id
-    const demandDurationId=generateRandomId('DEM')
-    
-    // demandDuration Details
-    const newDemandDuration = new DemandDuration({
-      ...obj,
-      demandDurationId
-    });
-
-    // Save to MongoDB
-    const savedNewDemandDuration = await newDemandDuration.save();
-
-    return savedNewDemandDuration;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-
-
-//resource created
-const createdResource=async(resourceDemandInfoId,contractDetailsId,demandBudgetId,demandDurationId,demandJobDetails,demandInterviewDetails)=>{
-  try {
-    // generate a random id
-    const resourceId=generateRandomId('RES')
-    
-    // resource Details
-    const newResource = new Resource({
-      resourceDemandInfoId,
-      contractDetailsId,
-      demandBudgetId,
-      demandDurationId,
-      resourceId,
-      ...demandJobDetails,
-      ...demandInterviewDetails
-    });
-
-    // Save to MongoDB
-    const savedNewResource = await newResource.save();
-
-    return savedNewResource;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-
-
-
-
-
 const generateRandomId = (data) => {
   const now = new Date();
 
-  // dataPart (first 3 letters)
   const dataPart = data
     .replace(/\s+/g, "")
     .toUpperCase()
     .slice(0, 3)
     .padEnd(3, "X");
 
-  // Date parts
   const day = String(now.getDate()).padStart(2, "0");
   const month = String(now.getMonth() + 1).padStart(2, "0");
   const year = now.getFullYear();
 
-  // Time (HHMM)
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
 
-  // Random alphabet
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const randomAlpha =
     alphabet[Math.floor(Math.random() * alphabet.length)];
@@ -279,7 +38,222 @@ const generateRandomId = (data) => {
   return `${dataPart}${day}${month}${year}${randomAlpha}${hours}${minutes}`;
 };
 
+// Company 
+const createCompany = async (companyData) => {
+  try {
+    const companyId = generateRandomId(companyData.companyName);
 
+    const companyDoc = new CompanyDetail({
+      ...companyData,
+      companyId,
+    });
 
+    return await companyDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+// Client 
+const createClient = async (clientData, companyId) => {
+  try {
+    const clientId = generateRandomId(clientData.clientName);
 
+    const clientDoc = new Client({
+      ...clientData,
+      companyId,
+      clientId,
+    });
+
+    return await clientDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Demand Technology 
+const createDemandTechnology = async (technologyName) => {
+  try {
+    const demandTechnologyDoc = new DemandTechnology({
+      demandTechnologyName: technologyName,
+    });
+
+    return await demandTechnologyDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Demand Sub Technology 
+const createDemandSubTechnology = async (
+  subTechnologyName,
+  demandTechnologyId
+) => {
+  try {
+    const demandSubTechnologyDoc = new DemandSubTechnology({
+      demandSubTechnologyName: subTechnologyName,
+      demandTechnologyId,
+    });
+
+    return await demandSubTechnologyDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Resource Demand Info 
+const createResourceDemandInfo = async (
+  resourceDemandData,
+  demandTechnology,
+  demandSubTechnology,
+  client
+) => {
+  try {
+    const resourceInfoId = generateRandomId("RIN");
+
+    const resourceDemandInfoDoc = new ResourceDemandInfo({
+      ...resourceDemandData,
+      demandTechnology,
+      demandSubTechnology,
+      clientId: client,
+      resourceInfoId,
+    });
+
+    return await resourceDemandInfoDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Contract Details 
+const createContractDetails = async (contractData) => {
+  try {
+    const contractDetailsId = generateRandomId(contractData.clientNeed);
+
+    const contractDetailsDoc = new ContractDetails({
+      ...contractData,
+      contractDetailsId,
+    });
+
+    return await contractDetailsDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Demand Budget 
+const createDemandBudget = async (budgetData) => {
+  try {
+    const demandBudgetId = generateRandomId(budgetData.budgetType);
+
+    const demandBudgetDoc = new DemandBudget({
+      ...budgetData,
+      demandBudgetId,
+    });
+
+    return await demandBudgetDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Demand Duration 
+const createDemandDuration = async (durationData) => {
+  try {
+    const demandDurationId = generateRandomId("DEM");
+
+    const demandDurationDoc = new DemandDuration({
+      ...durationData,
+      demandDurationId,
+    });
+
+    return await demandDurationDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Resource 
+const createResource = async (
+  resourceDemandInfo,
+  contractDetails,
+  demandBudget,
+  demandDuration,
+  jobDetails,
+  interviewDetails
+) => {
+  try {
+    const resourceId = generateRandomId("RES");
+
+    const resourceDoc = new Resource({
+      resourceDemandInfoId: resourceDemandInfo,
+      contractDetailsId: contractDetails,
+      demandBudgetId: demandBudget,
+      demandDurationId: demandDuration,
+      resourceId,
+      ...jobDetails,
+      ...interviewDetails,
+    });
+
+    return await resourceDoc.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Controller 
+export const addResourceController = async (req, res) => {
+  try {
+    const {
+      resourceDemandInfo,
+      contractDetails,
+      demandJobDetails,
+      demandDurationInfo,
+      demandBudgetInfo,
+      demandInterviewDetails,
+      companyDetails,
+      clientDetails,
+    } = req.body;
+
+    const company = await createCompany(companyDetails);
+    const client = await createClient(clientDetails, company?._id);
+
+    const demandTechnology = await createDemandTechnology(
+      resourceDemandInfo?.demandTechnologyName
+    );
+
+    const demandSubTechnology = await createDemandSubTechnology(
+      resourceDemandInfo?.demandSubTechnologyName,
+      demandTechnology?._id
+    );
+
+    const resourceDemandInfoDoc = await createResourceDemandInfo(
+      resourceDemandInfo,
+      demandTechnology,
+      demandSubTechnology,
+      client
+    );
+
+    const contractDetailsDoc = await createContractDetails(contractDetails);
+    const demandBudgetDoc = await createDemandBudget(demandBudgetInfo);
+    const demandDurationDoc = await createDemandDuration(demandDurationInfo);
+
+    const resource = await createResource(
+      resourceDemandInfoDoc,
+      contractDetailsDoc,
+      demandBudgetDoc,
+      demandDurationDoc,
+      demandJobDetails,
+      demandInterviewDetails
+    );
+
+    console.log(resource);
+
+    return res.json({ message: "Resource Added Successfully" });
+  } catch (error) {
+    return res.json({
+      message: "Adding Resource Failed",
+      error: error.message,
+    });
+  }
+};
