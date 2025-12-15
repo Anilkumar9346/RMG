@@ -26,7 +26,8 @@ export const addResourceController = async (req, res) => {
     demandDurationInfo,
     demandBudgetInfo,
     demandInterviewDetails,
-    companyDetails
+    companyDetails,
+    clientDetails
   } = req.body;
 
   const addResourceObj = {
@@ -82,6 +83,11 @@ export const addResourceController = async (req, res) => {
     "companyDetails":{
       "companyName":"PayPal",
       "companyLinkedId":"erv679bclwerttewg"
+    },
+    "clientDetails":{
+      "clientName":"Stripe",
+      "clientContact":"345678765",
+      "experienceLevel":"6 Years"
     }
   }
 
