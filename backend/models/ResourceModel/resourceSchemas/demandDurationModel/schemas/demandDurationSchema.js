@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
 export const demandDurationSchema = new mongoose.Schema({
-  demandStartDate: {
+  billingStartDate: {
     type: Date,
     required: true
   },
-  demandEndDate: {
+  billingEndDate: {
     type: Date,
     required: true
   },
@@ -18,6 +18,7 @@ export const demandDurationSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
+
   uniqueId: {
     type: String,
     required: true,
