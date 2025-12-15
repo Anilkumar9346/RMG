@@ -57,8 +57,8 @@ const getAllDataFromFrotend = async (req,res)=>{
      BGVNote,
 
      //for demand duration 
-     demandStartDate,
-     demandEndDate,
+     billingStartDate,
+     billingEndDate,
      tentativeDuration,
      demandDurationNote,
      uniqueId,
@@ -66,7 +66,7 @@ const getAllDataFromFrotend = async (req,res)=>{
      // for demand buget 
      //uniqueId
      budgetType,
-     billingStartDate,
+     demandBudgetBillingStartDate,
      currency,
      demandBudgetNote,
      budget,

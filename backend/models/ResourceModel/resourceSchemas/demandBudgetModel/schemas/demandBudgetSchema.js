@@ -11,7 +11,7 @@ export const demandBudgetSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  billingStartDate: {
+  demandBudgetBillingStartDate: {
     type: Date,
     required: true
   },
