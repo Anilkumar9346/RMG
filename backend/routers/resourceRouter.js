@@ -1,5 +1,13 @@
 import express from "express"
 
-export const resourceRouter = express.Router();
+import { addResourceValidator } from "../validators/resource.validator";
+import { validate } from "../middlewares/validate.middleware";
+import { addResourceController } from "../controllers/addResourceControllers/addResource.Controller";
 
-// resourceRouter.post('/api/resourceRouter',)
+const router = express.Router();
+
+// router.post("/add-resource", addResourceValidator, validate, addResourceController);
+
+// resourceRouter.post('/api/resourceRouter',);
+
+export const resourceRouter = router;
