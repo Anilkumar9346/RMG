@@ -18,70 +18,133 @@ import {DemandBudget} from '../../models/resourceModel/resourceSchemas/demandBud
 export const addResourceController = async (req, res) => {
 
   try {
-    const {
-      // ResourceDemandInfo
-      demandCategory,
-      noOfResource,
-      demandLevel,
-      engagement,
 
-      // DemandTechnology
-      demandTechnologyName,
-      demandSubTechnologyName,
-      demandType,
+  const {
+    resourceDemandInfo,
+    contractDetails,
+    demandJobDetails,
+    demandDurationInfo,
+    demandBudgetInfo,
+    demandInterviewDetails
+  } = req.body;
 
-      // Company Details
-      companyName,
-      companyLinkedId,
-      companyAddress,
-      CompanyId,
+  const addResourceObj = {
+    "resourceDemandInfo": {
+      "demandCategory": "IT",
+      "noOfResource": 3,
+      "demandLevel": "Senior",
+      "engagement": "Full Time",
+      "demandTechnologyName": "Node.js",
+      "demandSubTechnologyName": "Express.js",
+      "demandType": "Contract"
+    },
 
-      // Client details
-      companyId,
-      clientName,
-      clientContact,
-      experienceLevel,
-      clientId,
+    "contractDetails": {
+      "clientNeed": "Immediate",
+      "contractType": "Full Time",
+      "workingDays": 5,
+      "workingTiming": "9AM - 6PM",
+      "workingLocation": "Remote"
+    },
 
-      // Contract details
-      clientNeed,
-      contractType,
-      workingDays,
-      workingTiming,
-      workingLocation,
-      workingMode,
-      laptopProvide,
-      BGV,
-      clientBGV_Verify,
-      BGVNote,
+    "demandJobDetails": {
+      "jobDescription": "Looking for an experienced Node.js developer with strong backend skills."
+    },
 
-      // Demand duration
-      demandStartDate,
-      demandEndDate,
-      tentativeDuration,
-      demandDurationNote,
-      uniqueId,
+    "demandDurationInfo": {
+      "billingStartDate": "2025-01-01",
+      "billingEndDate": "2025-06-30",
+      "tentativeDuration": "6 Months",
+      "demandDurationNote": "Extendable based on performance",
+      "uniqueId": "DEM-00123"
+    },
 
-      // Budget Information
-      budgetType,
-      billingStartDate,
-      currency,
-      demandBudgetNote,
-      budget,
-      profitMargin,
-      payoutType,
+    "demandBudgetInfo": {
+      "budgetType": "Monthly",
+      "demandBudgetBillingStartDate": "2025-01-01",
+      "currency": "INR",
+      "demandBudgetNote": "Budget is flexible",
+      "budget": 150000,
+      "profitMargin": 20,
+      "payoutType": "Monthly"
+    },
 
-      // Misc
-      jobDescription,
-      modeOfInterview,
-      interviewNote,
-      budgetStatus,
-      techProfile,
-      contractToHire,
-      paymentConfirmation,
-      requirementResource,
-      nameOfTheSalePersion,
-    } = req.body;
+    "demandInterviewDetails": {
+      "modeOfInterview": "Online",
+      "interviewNote": "Technical + HR rounds",
+      "budgetStatus": "Approved",
+      "techProfile": "Backend Developer",
+      "contractToHire": true,
+      "paymentConfirmation": true,
+      "requirementResource": "Immediate"
+    }
+  }
+
+    // const {
+    //   // ResourceDemandInfo
+    //   demandCategory,
+    //   noOfResource,
+    //   demandLevel,
+    //   engagement,
+
+    //   // DemandTechnology
+    //   demandTechnologyName,
+    //   demandSubTechnologyName,
+    //   demandType,
+
+    //   // Company Details
+    //   companyName,
+    //   companyLinkedId,
+    //   companyAddress,
+    //   CompanyId,
+
+    //   // Client details
+    //   companyId,
+    //   clientName,
+    //   clientContact,
+    //   experienceLevel,
+    //   clientId,
+
+    //   // Contract details
+    //   clientNeed,
+    //   contractType,
+    //   workingDays,
+    //   workingTiming,
+    //   workingLocation,
+    //   workingMode,
+    //   laptopProvide,
+    //   BGV,
+    //   clientBGV_Verify,
+    //   BGVNote,
+
+    //   // Demand duration
+    //   demandStartDate,
+    //   demandEndDate,
+    //   tentativeDuration,
+    //   demandDurationNote,
+    //   uniqueId,
+
+    //   // Budget Information
+    //   budgetType,
+    //   billingStartDate,
+    //   currency,
+    //   demandBudgetNote,
+    //   budget,
+    //   profitMargin,
+    //   payoutType,
+
+    //   // Misc
+    //   jobDescription,
+    //   modeOfInterview,
+    //   interviewNote,
+    //   budgetStatus,
+    //   techProfile,
+    //   contractToHire,
+    //   paymentConfirmation,
+    //   requirementResource,
+    //   nameOfTheSalePersion,
+    // } = req.body;
+
 
     // Demand Technology
     const newDemandTechnology = new DemandTechnology({
