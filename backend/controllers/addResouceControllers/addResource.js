@@ -9,8 +9,9 @@ import {Client} from '../../models/resourceModel/resourceSchemas/resourceDemandI
 import {ContractDetails} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 
 import {DemandDuration} from '../../models/resourceModel/resourceSchemas/demandDurationModel/models/model.js'
+import { DemandBudget } from '../../models/resourceModel/resourceSchemas/demandBudgetModel/models/model.js'
 
-import {DemandBudget} from '../../models/resourceModel/resourceSchemas/demandBudgetModel/models/model.js'
+// import {DemandBudget} from '../../models/resourceModel/resourceSchemas/demandBudgetModel/models/model.js'
 
 
 // creating rerource 

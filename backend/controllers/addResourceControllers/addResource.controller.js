@@ -1,17 +1,17 @@
-import {Resource} from '../../models/ResourceModel/resourceModel.js'
+import {Resource} from '../../models/resourceModel/resourceModel.js'
 
-import {ResourceDemandInfo} from  '../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {DemandTechnology} from  '../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {DemandSubTechnology} from  '../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {CompanyDetail} from '../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {Client} from '../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {ResourceDemandInfo} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {DemandTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {DemandSubTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {CompanyDetail} from '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {Client} from '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 
 //import {WorkingLocation} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
-import {ContractDetails} from '../../models/ResourceModel/resourceSchemas/contractDetailsModel/models/model.js'
+import {ContractDetails} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 
-import {DemandDuration} from '../../models/ResourceModel/resourceSchemas/demandDurationModel/models/model.js'
+import {DemandDuration} from '../../models/resourceModel/resourceSchemas/demandDurationModel/models/model.js'
 
-import {DemandBudget} from '../../models/ResourceModel/resourceSchemas/demandBudgetModel/models/model.js'
+import {DemandBudget} from '../../models/resourceModel/resourceSchemas/demandBudgetModel/models/model.js'
 
 // creating rerource 
 
