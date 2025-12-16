@@ -38,9 +38,17 @@ const generateRandomId = (data) => {
   return `${dataPart}${day}${month}${year}${randomAlpha}${hours}${minutes}`;
 };
 
-// Company 
+// Company
 const createCompany = async (companyData) => {
   try {
+    const existingCompany = await CompanyDetail.findOne({
+      companyName: companyData.companyName,
+    });
+
+    if (existingCompany) {
+      return existingCompany;
+    }
+
     const companyId = generateRandomId(companyData.companyName);
 
     const companyDoc = new CompanyDetail({
@@ -50,13 +58,22 @@ const createCompany = async (companyData) => {
 
     return await companyDoc.save();
   } catch (error) {
-    console.log(error);
+    console.error("Error creating company:", error);
+    throw error;
   }
 };
 
 // Client 
 const createClient = async (clientData, companyId) => {
   try {
+    const existingClient = await Client.findOne({
+      clientName: clientData.clientName,
+    });
+
+    if (existingClient) {
+      return existingClient;
+    }
+
     const clientId = generateRandomId(clientData.clientName);
 
     const clientDoc = new Client({
@@ -74,6 +91,13 @@ const createClient = async (clientData, companyId) => {
 // Demand Technology 
 const createDemandTechnology = async (technologyName) => {
   try {
+    const existingDemandTech = await DemandTechnology.findOne({
+      demandTechnologyName: technologyName,
+    });
+
+    if (existingDemandTech) {
+      return existingDemandTech;
+    }
     const demandTechnologyDoc = new DemandTechnology({
       demandTechnologyName: technologyName,
     });
@@ -85,11 +109,15 @@ const createDemandTechnology = async (technologyName) => {
 };
 
 // Demand Sub Technology 
-const createDemandSubTechnology = async (
-  subTechnologyName,
-  demandTechnologyId
-) => {
+const createDemandSubTechnology = async ( subTechnologyName, demandTechnologyId ) => {
   try {
+    const existingDemandSubTech = await DemandSubTechnology.findOne({
+      demandSubTechnologyName: subTechnologyName,
+    });
+
+    if (existingDemandSubTech) {
+      return existingDemandSubTech;
+    }
     const demandSubTechnologyDoc = new DemandSubTechnology({
       demandSubTechnologyName: subTechnologyName,
       demandTechnologyId,
@@ -102,12 +130,7 @@ const createDemandSubTechnology = async (
 };
 
 // Resource Demand Info 
-const createResourceDemandInfo = async (
-  resourceDemandData,
-  demandTechnology,
-  demandSubTechnology,
-  client
-) => {
+const createResourceDemandInfo = async ( resourceDemandData, demandTechnology, demandSubTechnology, client ) => {
   try {
     const resourceInfoId = generateRandomId("RIN");
 
