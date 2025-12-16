@@ -6,7 +6,6 @@ import { addResourceController } from "../controllers/resourceController/addReso
 import { getAllResources, getSingleResources } from "../controllers/resourceController/getResource/getResource.controller.js";
 import { deleteSingleResources } from "../controllers/resourceController/deleteResource/deleteResource.controller.js";
 import { updateResource } from "../controllers/resourceController/updateResource/updateResource.controller.js";
-import { addComment } from "../controllers/commentController/addComment/addComment.controller.js";
 
 const router = express.Router();
 
@@ -19,9 +18,5 @@ router.delete("/delete-single-resource/:id",deleteSingleResources);
 
 router.put("/update-resource/:id", updateResource);
 
-router.post("/addComment", addComment);
-
-
-// resourceRouter.post('/api/resourceRouter',);
 
 export const resourceRouter = router;
