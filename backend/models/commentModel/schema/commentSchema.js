@@ -1,25 +1,25 @@
 import mongoose from "mongoose";
 
 export const commentSchema = new mongoose.Schema(
-{
+  {
     resourceModelId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Resource",
-      trim: true
+      trim: true,
     },
 
-    userId:{
-      type:String,
-      required:true
+    userId: {
+      type: String,
+      required: true,
+      trim: true,
     },
 
     commentNote: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      maxlength: [1024, "Comment cannot exceed 1024 characters"],
     },
-
-
-},{ timestamps: true }
+  },
+  { timestamps: true }
 );
-
