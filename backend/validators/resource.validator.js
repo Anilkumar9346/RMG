@@ -53,12 +53,12 @@ export const addResourceValidator = [
   body("contractDetails.clientBGV_Verify")
   .notEmpty().withMessage("clientBGV_Verify is required"),
 
-  //Demand Job Validation
+  // Demand Job Validation
   body("demandJobDetails.jobDescription")
     .notEmpty().withMessage("Job Description is required")
     .isLength({ min: 10 }).withMessage("Job Description must be at least 10 characters"),
 
-  //Demand Duration Validation
+  // Demand Duration Validation
   body("demandDurationInfo.billingStartDate")
     .notEmpty().withMessage("Billing Start Date is required"),
 
@@ -71,7 +71,7 @@ export const addResourceValidator = [
   body("demandDurationInfo.demandDurationNote")
     .optional(),
 
-  //Demand Budget Validation
+  // Demand Budget Validation
   body("demandBudgetInfo.budgetType")
     .notEmpty().withMessage("Budget Type is required"),
 
@@ -87,7 +87,7 @@ export const addResourceValidator = [
   body("demandBudgetInfo.paymentConformation")
     .notEmpty().withMessage("Payment Confirmation is required"),
 
-  //Demand Interview Details Validation
+  // Demand Interview Details Validation
   body("demandInterviewDetails.modeOfInterview")
     .optional(),
 
