@@ -217,7 +217,7 @@ const createResource = async (
       ...jobDetails,
       ...interviewDetails,
     });
-
+console.log(interviewDetails)
     return await resourceDoc.save();
   } catch (error) {
     console.log(error);
@@ -270,6 +270,12 @@ export const addResourceController = async (req, res) => {
       demandInterviewDetails
     );
 
+    if(!resource){
+      return res.json({
+      message: "Adding Resource Failed",
+      error: error.message,
+      });
+    }
     console.log(resource);
 
     return res.json({ message: "Resource Added Successfully" });

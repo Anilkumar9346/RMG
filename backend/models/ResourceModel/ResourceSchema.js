@@ -97,7 +97,7 @@ export const resourceSchema = new mongoose.Schema(
 
 
     // name detail of sale persion
-    nameOfTheSalePersion: {
+    nameOfTheSalesPerson: {
       type: String,
       required: true,
       trim: true
