@@ -2,7 +2,29 @@ import { Resource } from "../../models/resourceModel/resourceModel.js";
 
 export const getAllResources = async (req, res) => {
   try {
-    const resources = await Resource.find();
+    const resources = await Resource.find()
+  .populate({
+    path: "resourceDemandInfoId",
+    populate: [
+      {
+        path: "leadId",
+        populate: {
+          path: "clientId",
+        },
+      },
+      {
+        path: "demandTechnology",
+      },
+      {
+        path: "demandSubTechnology",
+      },
+    ],
+  })
+  .populate("contractDetailsId")
+  .populate("demandBudgetId")
+  .populate("demandDurationId");
+
+
 
     res.status(200).json({
       success: true,
