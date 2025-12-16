@@ -1,10 +1,9 @@
 import {Resource} from '../../models/resourceModel/resourceModel.js'
 
-import {ResourceDemandInfo} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {Client, Lead, ResourceDemandInfo} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 import {DemandTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 import {DemandSubTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {CompanyDetail} from '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {Client} from '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+
 
 //import {WorkingLocation} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 import {ContractDetails} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
@@ -38,25 +37,25 @@ const generateRandomId = (data) => {
   return `${dataPart}${day}${month}${year}${randomAlpha}${hours}${minutes}`;
 };
 
-// Company
-const createCompany = async (companyData) => {
+// Client
+const createClient = async (clientData) => {
   try {
-    const existingCompany = await CompanyDetail.findOne({
-      companyName: companyData.companyName,
+    const existingCompany = await Client.findOne({
+      clientName: clientData?.clientName,
     });
 
     if (existingCompany) {
       return existingCompany;
     }
 
-    const companyId = generateRandomId(companyData.companyName);
+    const clientId = generateRandomId(clientData.clientName);
 
-    const companyDoc = new CompanyDetail({
-      ...companyData,
-      companyId,
+    const clientDoc = new Client({
+      ...clientData,
+      clientId,
     });
 
-    return await companyDoc.save();
+    return await clientDoc.save();
   } catch (error) {
     console.error("Error creating company:", error);
     throw error;
@@ -64,25 +63,25 @@ const createCompany = async (companyData) => {
 };
 
 // Client 
-const createClient = async (clientData, companyId) => {
+const createLead = async (leadData, clientId) => {
   try {
-    const existingClient = await Client.findOne({
-      clientName: clientData.clientName,
+    const existingClient = await Lead.findOne({
+      leadName: leadData.leadName,
     });
 
     if (existingClient) {
       return existingClient;
     }
 
-    const clientId = generateRandomId(clientData.clientName);
+    const leadId = generateRandomId(leadData.leadName);
 
-    const clientDoc = new Client({
-      ...clientData,
-      companyId,
+    const leadDoc = new Lead({
+      ...leadData,
       clientId,
+      leadId,
     });
 
-    return await clientDoc.save();
+    return await leadDoc.save();
   } catch (error) {
     console.log(error);
   }
@@ -217,7 +216,7 @@ const createResource = async (
       ...jobDetails,
       ...interviewDetails,
     });
-
+// console.log(resourceDoc)
     return await resourceDoc.save();
   } catch (error) {
     console.log(error);
@@ -238,8 +237,8 @@ export const addResourceController = async (req, res) => {
       clientDetails,
     } = req.body;
 
-    const company = await createCompany(companyDetails);
-    const client = await createClient(clientDetails, company?._id);
+    const client = await createClient(companyDetails);
+    const lead = await createLead(clientDetails, client?._id);
 
     const demandTechnology = await createDemandTechnology(
       resourceDemandInfo?.demandTechnologyName
@@ -254,7 +253,7 @@ export const addResourceController = async (req, res) => {
       resourceDemandInfo,
       demandTechnology,
       demandSubTechnology,
-      client
+      lead
     );
 
     const contractDetailsDoc = await createContractDetails(contractDetails);
@@ -270,7 +269,12 @@ export const addResourceController = async (req, res) => {
       demandInterviewDetails
     );
 
-    console.log(resource);
+    if(!resource){
+      return res.json({
+      message: "Adding Resource Failed",
+      error: error.message,
+      });
+    }
 
     return res.json({ message: "Resource Added Successfully" });
   } catch (error) {
