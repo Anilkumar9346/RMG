@@ -1,16 +1,16 @@
-import {Resource} from '../../models/resourceModel/resourceModel.js'
+import {Resource} from '../../../models/resourceModel/resourceModel.js'
 
-import {Client, Lead, ResourceDemandInfo} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {DemandTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {DemandSubTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {Client, Lead, ResourceDemandInfo} from  '../../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {DemandTechnology} from  '../../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {DemandSubTechnology} from  '../../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 
 
 //import {WorkingLocation} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
-import {ContractDetails} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
+import {ContractDetails} from '../../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 
-import {DemandDuration} from '../../models/resourceModel/resourceSchemas/demandDurationModel/models/model.js'
+import {DemandDuration} from '../../../models/resourceModel/resourceSchemas/demandDurationModel/models/model.js'
 
-import {DemandBudget} from '../../models/resourceModel/resourceSchemas/demandBudgetModel/models/model.js'
+import {DemandBudget} from '../../../models/resourceModel/resourceSchemas/demandBudgetModel/models/model.js'
 
 // creating rerource 
 
@@ -270,7 +270,7 @@ export const addResourceController = async (req, res) => {
     );
 
     if(!resource){
-      return res.json({
+      return res.status(400).json({
       message: "Adding Resource Failed",
       error: error.message,
       });
