@@ -4,7 +4,6 @@ import {Client, Lead, ResourceDemandInfo} from  '../../../models/resourceModel/r
 import {DemandTechnology} from  '../../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 import {DemandSubTechnology} from  '../../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 
-
 //import {WorkingLocation} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 import {ContractDetails} from '../../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 
