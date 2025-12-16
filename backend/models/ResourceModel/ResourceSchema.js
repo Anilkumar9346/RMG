@@ -16,23 +16,16 @@ export const resourceSchema = new mongoose.Schema(
     },
 
 
-    ContractDetailsId: {
+    contractDetailsId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ContractDetails",
       trim: true
     },
-    
-
-
-    // DemandJobDetailsID: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "DemandJobDetails",
-    //   trim: true
-    // },
+  
 
 
 
-    DemandDurationId: {
+    demandDurationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "DemandDuration",
       trim: true
@@ -40,7 +33,7 @@ export const resourceSchema = new mongoose.Schema(
 
 
 
-    DemandBudgetId: {
+    demandBudgetId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "DemandBudget",
       trim: true

@@ -2,8 +2,9 @@ import mongoose from "mongoose";
 import { resourceDemandInfoSchema } from "../schemas/resourceDemandInfoSchema.js";
 import { demandTechnologySchema } from "../schemas/demandTechnologySchema.js";
 import { demandSubTechnologySchema } from "../schemas/demandSubTechnologySchema.js";
-import { clientSchema } from "../schemas/clientSchema.js";
-import { companyDetailSchema } from "../schemas/companyDetailSchema.js";
+import { clientDetailSchema } from "../schemas/clientDetailSchema.js";
+import { leadSchema } from "../schemas/leadSchema.js";
+
 
 // Resource Demand Info Model
 export const ResourceDemandInfo = mongoose.model(
@@ -24,14 +25,14 @@ export const DemandSubTechnology = mongoose.model(
 );
 
 // Client Model
-export const Client = mongoose.model(
-  "Client",
-  clientSchema
+export const Lead = mongoose.model(
+  "LeadSchema",
+  leadSchema
 );
 
 // CompanyDetail Model
-export const CompanyDetail = mongoose.model(
-  "CompanyDetail",
-  companyDetailSchema
+export const Client = mongoose.model(
+  "ClientDetail",
+  clientDetailSchema
 );
 
