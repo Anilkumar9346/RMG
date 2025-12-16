@@ -129,7 +129,7 @@ const createDemandSubTechnology = async ( subTechnologyName, demandTechnologyId 
 };
 
 // Resource Demand Info 
-const createResourceDemandInfo = async ( resourceDemandData, demandTechnology, demandSubTechnology, client ) => {
+const createResourceDemandInfo = async ( resourceDemandData, demandTechnology, demandSubTechnology, lead ) => {
   try {
     const resourceInfoId = generateRandomId("RIN");
 
@@ -137,7 +137,7 @@ const createResourceDemandInfo = async ( resourceDemandData, demandTechnology, d
       ...resourceDemandData,
       demandTechnology,
       demandSubTechnology,
-      clientId: client,
+      leadId: lead,
       resourceInfoId,
     });
 

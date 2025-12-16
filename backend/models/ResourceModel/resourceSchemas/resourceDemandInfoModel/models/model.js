@@ -24,15 +24,15 @@ export const DemandSubTechnology = mongoose.model(
   demandSubTechnologySchema
 );
 
-// Client Model
+// Lead Model
 export const Lead = mongoose.model(
-  "LeadSchema",
+  "Lead",
   leadSchema
 );
 
-// CompanyDetail Model
+// Client Model
 export const Client = mongoose.model(
-  "ClientDetail",
+  "Client",
   clientDetailSchema
 );
 
