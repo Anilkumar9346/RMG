@@ -46,9 +46,9 @@ export const resourceDemandInfoSchema = new mongoose.Schema(
       required: true 
     },
 
-    clientId: {
+    leadId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Client",
+      ref: "Lead",
       required: true
     },
   },

@@ -1,29 +1,17 @@
 import mongoose from "mongoose";
 
-export const clientSchema = new mongoose.Schema(
+export const clientDetailSchema = new mongoose.Schema(
   {
-    companyId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "CompanyDetail",
-      trim: true,
-    },
-
     clientName: {
       type: String,
       required: true,
       trim: true,
     },
 
-
-    clientContact: {
+    clientLinkedId: {
       type: String,
       required: true,
       trim: true,
-    },
-
-    experienceLevel:{
-      type:String,
-      require:true,
     },
 
     clientId: {

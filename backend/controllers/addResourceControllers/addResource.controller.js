@@ -1,10 +1,9 @@
 import {Resource} from '../../models/resourceModel/resourceModel.js'
 
-import {ResourceDemandInfo} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+import {Client, Lead, ResourceDemandInfo} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 import {DemandTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 import {DemandSubTechnology} from  '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {CompanyDetail} from '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
-import {Client} from '../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
+
 
 //import {WorkingLocation} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 import {ContractDetails} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
@@ -38,34 +37,51 @@ const generateRandomId = (data) => {
   return `${dataPart}${day}${month}${year}${randomAlpha}${hours}${minutes}`;
 };
 
-// Company 
-const createCompany = async (companyData) => {
+// Client
+const createClient = async (clientData) => {
   try {
-    const companyId = generateRandomId(companyData.companyName);
-
-    const companyDoc = new CompanyDetail({
-      ...companyData,
-      companyId,
+    const existingCompany = await Client.findOne({
+      clientName: clientData?.clientName,
     });
 
-    return await companyDoc.save();
-  } catch (error) {
-    console.log(error);
-  }
-};
+    if (existingCompany) {
+      return existingCompany;
+    }
 
-// Client 
-const createClient = async (clientData, companyId) => {
-  try {
     const clientId = generateRandomId(clientData.clientName);
 
     const clientDoc = new Client({
       ...clientData,
-      companyId,
       clientId,
     });
 
     return await clientDoc.save();
+  } catch (error) {
+    console.error("Error creating company:", error);
+    throw error;
+  }
+};
+
+// Client 
+const createLead = async (leadData, clientId) => {
+  try {
+    const existingClient = await Lead.findOne({
+      leadName: leadData.leadName,
+    });
+
+    if (existingClient) {
+      return existingClient;
+    }
+
+    const leadId = generateRandomId(leadData.leadName);
+
+    const leadDoc = new Lead({
+      ...leadData,
+      clientId,
+      leadId,
+    });
+
+    return await leadDoc.save();
   } catch (error) {
     console.log(error);
   }
@@ -74,6 +90,13 @@ const createClient = async (clientData, companyId) => {
 // Demand Technology 
 const createDemandTechnology = async (technologyName) => {
   try {
+    const existingDemandTech = await DemandTechnology.findOne({
+      demandTechnologyName: technologyName,
+    });
+
+    if (existingDemandTech) {
+      return existingDemandTech;
+    }
     const demandTechnologyDoc = new DemandTechnology({
       demandTechnologyName: technologyName,
     });
@@ -85,11 +108,15 @@ const createDemandTechnology = async (technologyName) => {
 };
 
 // Demand Sub Technology 
-const createDemandSubTechnology = async (
-  subTechnologyName,
-  demandTechnologyId
-) => {
+const createDemandSubTechnology = async ( subTechnologyName, demandTechnologyId ) => {
   try {
+    const existingDemandSubTech = await DemandSubTechnology.findOne({
+      demandSubTechnologyName: subTechnologyName,
+    });
+
+    if (existingDemandSubTech) {
+      return existingDemandSubTech;
+    }
     const demandSubTechnologyDoc = new DemandSubTechnology({
       demandSubTechnologyName: subTechnologyName,
       demandTechnologyId,
@@ -102,12 +129,7 @@ const createDemandSubTechnology = async (
 };
 
 // Resource Demand Info 
-const createResourceDemandInfo = async (
-  resourceDemandData,
-  demandTechnology,
-  demandSubTechnology,
-  client
-) => {
+const createResourceDemandInfo = async ( resourceDemandData, demandTechnology, demandSubTechnology, lead ) => {
   try {
     const resourceInfoId = generateRandomId("RIN");
 
@@ -115,7 +137,7 @@ const createResourceDemandInfo = async (
       ...resourceDemandData,
       demandTechnology,
       demandSubTechnology,
-      clientId: client,
+      leadId: lead,
       resourceInfoId,
     });
 
@@ -194,7 +216,7 @@ const createResource = async (
       ...jobDetails,
       ...interviewDetails,
     });
-
+// console.log(resourceDoc)
     return await resourceDoc.save();
   } catch (error) {
     console.log(error);
@@ -215,8 +237,8 @@ export const addResourceController = async (req, res) => {
       clientDetails,
     } = req.body;
 
-    const company = await createCompany(companyDetails);
-    const client = await createClient(clientDetails, company?._id);
+    const client = await createClient(companyDetails);
+    const lead = await createLead(clientDetails, client?._id);
 
     const demandTechnology = await createDemandTechnology(
       resourceDemandInfo?.demandTechnologyName
@@ -231,7 +253,7 @@ export const addResourceController = async (req, res) => {
       resourceDemandInfo,
       demandTechnology,
       demandSubTechnology,
-      client
+      lead
     );
 
     const contractDetailsDoc = await createContractDetails(contractDetails);
@@ -247,7 +269,12 @@ export const addResourceController = async (req, res) => {
       demandInterviewDetails
     );
 
-    console.log(resource);
+    if(!resource){
+      return res.json({
+      message: "Adding Resource Failed",
+      error: error.message,
+      });
+    }
 
     return res.json({ message: "Resource Added Successfully" });
   } catch (error) {
