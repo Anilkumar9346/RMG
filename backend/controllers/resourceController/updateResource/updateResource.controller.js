@@ -29,20 +29,20 @@ export const updateResource = async (req, res) => {
     );
 
     const updateContractDetails=await ContractDetails.findByIdAndUpdate(data.contractDetailsId,updateData.contractDetailsId)
-    const updateDemandBudget=await DemandBudget.findByIdAndUpdate(data.demandBudgetId,updateData.demandBudgetId)
-    const updateDemandDuration=await DemandDuration.findByIdAndUpdate(data.demandDurationId,updateData.demandDurationId)
     if (!updateContractDetails) {
       return res.status(404).json({
         success: false,
         message: " ContractDetails Resource not found",
       });
     }
+    const updateDemandBudget=await DemandBudget.findByIdAndUpdate(data.demandBudgetId,updateData.demandBudgetId)
     if (!updateDemandBudget) {
       return res.status(404).json({
         success: false,
         message: "DemandBudget Resource not found",
       });
     }
+    const updateDemandDuration=await DemandDuration.findByIdAndUpdate(data.demandDurationId,updateData.demandDurationId)
     if (!updateDemandDuration) {
       return res.status(404).json({
         success: false,
@@ -54,20 +54,20 @@ export const updateResource = async (req, res) => {
     
     const getClient=await Lead.findById(ResourceDemandInfoId.leadId)
     const updateClient=await Client.findByIdAndUpdate(getClient.clientId,updateData.resourceDemandInfoId.leadId.clientId)
-    const updateDemandTech=await DemandTechnology.findByIdAndUpdate(ResourceDemandInfoId.demandTechnology,updateData.resourceDemandInfoId.demandTechnology)
-    const updateDemandSubTech=await DemandSubTechnology.findByIdAndUpdate(ResourceDemandInfoId.demandSubTechnology,updateData.resourceDemandInfoId.demandSubTechnology)
     if(!updateClient){
       return res.status(404).json({
         success: false,
         message: "Client Resource not found",
       });
     }
+    const updateDemandTech=await DemandTechnology.findByIdAndUpdate(ResourceDemandInfoId.demandTechnology,updateData.resourceDemandInfoId.demandTechnology)
     if(!updateDemandTech){
       return res.status(404).json({
         success: false,
         message: "Client Resource not found",
       });
     }
+    const updateDemandSubTech=await DemandSubTechnology.findByIdAndUpdate(ResourceDemandInfoId.demandSubTechnology,updateData.resourceDemandInfoId.demandSubTechnology)
     if(!updateDemandSubTech){
       return res.status(404).json({
         success: false,
