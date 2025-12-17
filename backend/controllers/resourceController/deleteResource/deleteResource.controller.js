@@ -17,7 +17,9 @@ export const deleteSingleResources = async (req, res) => {
       });
     }
 
-    const data = await Resource.findById(id);
+    const data = await Resource.findById(id).select(
+      "contractDetailsId demandBudgetId demandDurationId resourceDemandInfoId"
+    );
 
     const deleteContractDetails=await ContractDetails.findByIdAndDelete(data.contractDetailsId)
     const deleteDemandBudget=await DemandBudget.findByIdAndDelete(data.demandBudgetId)
@@ -40,23 +42,6 @@ export const deleteSingleResources = async (req, res) => {
         message: "DemandDuration Resource not found",
       });
     }
-    // const ResourceDemandInfoId=await ResourceDemandInfo.findById(data.resourceDemandInfoId)
-
-    // const getClient=await Lead.findById(ResourceDemandInfoId.leadId)
-    // const deleteClient=await Client.findByIdAndDelete(getClient.clientId)
-    // if(!deleteClient){
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Client Resource not found",
-    //   });
-    // }
-    // const deleteLead=await Lead.findByIdAndDelete(ResourceDemandInfoId.leadId)
-    // if(!deleteLead){
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "Resource not found",
-    //   });
-    // }
     const deleteResourceDemandInfoId=await ResourceDemandInfo.findByIdAndDelete(data.resourceDemandInfoId)
     if(!deleteResourceDemandInfoId){
       return res.status(404).json({
@@ -89,40 +74,40 @@ export const deleteSingleResources = async (req, res) => {
 
 
 
-export const deleteMultipleResources = async (req, res) => {
-  try {
-    const { ids } = req.body;
+// export const deleteMultipleResources = async (req, res) => {
+//   try {
+//     const { ids } = req.body;
 
-    if (!ids || !Array.isArray(ids) || ids.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Please provide an array of resource IDs",
-      });
-    }
+//     if (!ids || !Array.isArray(ids) || ids.length === 0) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Please provide an array of resource IDs",
+//       });
+//     }
 
-    const validIds = ids.filter(id => mongoose.Types.ObjectId.isValid(id));
+//     const validIds = ids.filter(id => mongoose.Types.ObjectId.isValid(id));
 
-    if (validIds.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "No valid resource IDs provided",
-      });
-    }
+//     if (validIds.length === 0) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "No valid resource IDs provided",
+//       });
+//     }
 
-    const result = await Resource.deleteMany({
-      _id: { $in: validIds },
-    });
+//     const result = await Resource.deleteMany({
+//       _id: { $in: validIds },
+//     });
 
-    return res.status(200).json({
-      success: true,
-      message: "Resources deleted successfully",
-      deletedCount: result.deletedCount,
-    });
-  } catch (error) {
-    console.error("Delete multiple resources error:", error);
-    return res.status(500).json({
-      success: false,
-      message: "Failed to delete resources",
-    });
-  }
-};
+//     return res.status(200).json({
+//       success: true,
+//       message: "Resources deleted successfully",
+//       deletedCount: result.deletedCount,
+//     });
+//   } catch (error) {
+//     console.error("Delete multiple resources error:", error);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to delete resources",
+//     });
+//   }
+// };
