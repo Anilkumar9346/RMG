@@ -40,5 +40,9 @@ export const demandBudgetSchema = new mongoose.Schema({
     type: String,
     enum:['L1','L2'],
     required: true
+  },
+  paymentConformationDocumentPath: {
+    type: String,
+    default:''
   }
 }, { timestamps: true });
