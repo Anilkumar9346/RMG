@@ -96,11 +96,13 @@ export const resourceSchema = new mongoose.Schema(
       trim: true
     },
 
+    //status of that resource
     resourceStatus: {
       type: String,
       required: true,
       trim: true
     },
+    
 },{ timestamps: true }
 );
 

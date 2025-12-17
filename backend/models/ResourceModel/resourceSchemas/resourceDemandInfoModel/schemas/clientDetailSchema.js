@@ -10,7 +10,7 @@ export const clientDetailSchema = new mongoose.Schema(
 
     clientLinkedId: {
       type: String,
-      required: true,
+      default:'',
       trim: true,
     },
 
