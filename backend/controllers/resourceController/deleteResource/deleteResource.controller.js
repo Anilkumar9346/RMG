@@ -22,20 +22,20 @@ export const deleteSingleResources = async (req, res) => {
     );
 
     const deleteContractDetails=await ContractDetails.findByIdAndDelete(data.contractDetailsId)
-    const deleteDemandBudget=await DemandBudget.findByIdAndDelete(data.demandBudgetId)
-    const deleteDemandDuration=await DemandDuration.findByIdAndDelete(data.demandDurationId)
     if (!deleteContractDetails) {
       return res.status(404).json({
         success: false,
         message: " ContractDetails Resource not found",
       });
     }
+    const deleteDemandBudget=await DemandBudget.findByIdAndDelete(data.demandBudgetId)
     if (!deleteDemandBudget) {
       return res.status(404).json({
         success: false,
         message: "DemandBudget Resource not found",
       });
     }
+    const deleteDemandDuration=await DemandDuration.findByIdAndDelete(data.demandDurationId)
     if (!deleteDemandDuration) {
       return res.status(404).json({
         success: false,
