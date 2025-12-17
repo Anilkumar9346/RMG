@@ -7,31 +7,29 @@ import { leadSchema } from "../schemas/leadSchema.js";
 
 
 // Resource Demand Info Model
-export const ResourceDemandInfo = mongoose.model(
-  "ResourceDemandInfo",
-  resourceDemandInfoSchema
-);
+export const ResourceDemandInfo =  mongoose.models.ResourceDemandInfo ||
+  mongoose.model("ResourceDemandInfo", resourceDemandInfoSchema);
 
 // Demand Technology Model
-export const DemandTechnology = mongoose.model(
+export const DemandTechnology = mongoose.models.DemandTechnology || mongoose.model(
   "DemandTechnology",
   demandTechnologySchema
 );
 
 // Demand Sub Technology Model
-export const DemandSubTechnology = mongoose.model(
+export const DemandSubTechnology = mongoose.models.DemandSubTechnology || mongoose.model(
   "DemandSubTechnology",
   demandSubTechnologySchema
 );
 
 // Lead Model
-export const Lead = mongoose.model(
+export const Lead = mongoose.models.Lead || mongoose.model(
   "Lead",
   leadSchema
 );
 
 // Client Model
-export const Client = mongoose.model(
+export const Client = mongoose.models.Client || mongoose.model(
   "Client",
   clientDetailSchema
 );

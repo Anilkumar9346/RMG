@@ -1,5 +1,10 @@
 import { Resource } from "../../../models/resourceModel/resourceModel.js";
 import mongoose from "mongoose";
+import { ContractDetails } from "../../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js";
+import { ResourceDemandInfo } from "../../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js";
+import { DemandDuration } from "../../../models/ResourceModel/resourceSchemas/demandDurationModel/models/model.js";
+import { DemandBudget } from "../../../models/ResourceModel/resourceSchemas/demandBudgetModel/models/model.js";
+// import { Client, Lead } from "../../../models/ResourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js";
 
 export const deleteSingleResources = async (req, res) => {
   try {
@@ -9,6 +14,54 @@ export const deleteSingleResources = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "Invalid resource ID",
+      });
+    }
+
+    const data = await Resource.findById(id);
+
+    const deleteContractDetails=await ContractDetails.findByIdAndDelete(data.contractDetailsId)
+    const deleteDemandBudget=await DemandBudget.findByIdAndDelete(data.demandBudgetId)
+    const deleteDemandDuration=await DemandDuration.findByIdAndDelete(data.demandDurationId)
+    if (!deleteContractDetails) {
+      return res.status(404).json({
+        success: false,
+        message: " ContractDetails Resource not found",
+      });
+    }
+    if (!deleteDemandBudget) {
+      return res.status(404).json({
+        success: false,
+        message: "DemandBudget Resource not found",
+      });
+    }
+    if (!deleteDemandDuration) {
+      return res.status(404).json({
+        success: false,
+        message: "DemandDuration Resource not found",
+      });
+    }
+    // const ResourceDemandInfoId=await ResourceDemandInfo.findById(data.resourceDemandInfoId)
+
+    // const getClient=await Lead.findById(ResourceDemandInfoId.leadId)
+    // const deleteClient=await Client.findByIdAndDelete(getClient.clientId)
+    // if(!deleteClient){
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Client Resource not found",
+    //   });
+    // }
+    // const deleteLead=await Lead.findByIdAndDelete(ResourceDemandInfoId.leadId)
+    // if(!deleteLead){
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Resource not found",
+    //   });
+    // }
+    const deleteResourceDemandInfoId=await ResourceDemandInfo.findByIdAndDelete(data.resourceDemandInfoId)
+    if(!deleteResourceDemandInfoId){
+      return res.status(404).json({
+        success: false,
+        message: "ResourceDemandInfo Resource not found",
       });
     }
 
