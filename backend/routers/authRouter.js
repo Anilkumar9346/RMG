@@ -4,6 +4,7 @@ import { deleteUser } from "../controllers/authController/deleteUserController/d
 import { getAllUser, getUser } from "../controllers/authController/getUserController/getUser.controller.js";
 import { loginUser } from "../controllers/authController/authUserController.js/authUser.controller.js";
 import { authenticate } from "../controllers/authController/authUserController.js/authorization.controller.js";
+import { sendOTP } from "../controllers/authController/mailController/sendOTP.controller.js";
 
 const router = express.Router();
 
@@ -15,5 +16,8 @@ router.get('/authUserdata',authenticate)
 
 router.get('/get-all-User',getAllUser)
 router.delete('/delete-User/:id',deleteUser)
+
+//otp sender
+router.post('/get-OTP',sendOTP)
 
 export const authRouter = router;
