@@ -23,6 +23,11 @@ export const resumeSchema = new mongoose.Schema(
       required:true
     },
 
+    resumeStatus:{
+      type:String,
+      required:true
+    }
+
 },{ timestamps: true }
 );
 

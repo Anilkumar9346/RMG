@@ -3,10 +3,12 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectDB } from "./config/db.js";
 import { resourceRouter } from "./routers/resourceRouter.js";
-import { userRouter } from "./models/userModel/userRoutes.js";
 import { notFound } from "./controllers/errorController/notFound.js";
 import { errorHandler } from "./controllers/errorController/errorHandler.js";
 import { commentRouter } from "./routers/commentRouter.js";
+import { authRouter } from "./routers/authRouter.js";
+import { authenticate } from "./controllers/authController/authUserController.js/authorization.controller.js";
+import { authorizeRoles } from "./controllers/authController/authUserController.js/authorizeRole.middleware.js";
 dotenv.config();
 
 const app = express();
@@ -21,13 +23,14 @@ app.use(cors())
 
 app.use(express.json());
 
+//AuthRouter
+app.use("/api/authUser",authRouter)
 
 // resourceRouter
-app.use("/api/resource", resourceRouter);
-app.use("/api/user", userRouter);
+app.use("/api/resource",authenticate,authorizeRoles("ADMIN", "SALES_MANAGER","HR"), resourceRouter);
 
 //commentRouter
-app.use("/api/comment", commentRouter);
+app.use("/api/comment",authenticate, commentRouter);
 
 
 //errorRouter
