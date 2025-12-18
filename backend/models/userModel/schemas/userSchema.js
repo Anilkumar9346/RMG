@@ -38,6 +38,16 @@ export const userSchema = new mongoose.Schema(
     role: {
       type: String,
       default:'employee'
+    },
+
+    isActive: {
+      type: Boolean,
+      default:false
+    },
+
+    isVerify: {
+      type: Boolean,
+      default:false
     }
   },
   {

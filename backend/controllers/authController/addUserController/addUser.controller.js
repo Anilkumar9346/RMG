@@ -3,12 +3,19 @@ import { User } from "../../../models/userModel/models/model.js";
 
 export const addUser = async (req, res) => {
   try {
-    const { username, fullname, email, password } = req.body;
+    const { username, fullname, email, password, isVerify } = req.body;
 
     if (!username || !fullname || !email || !password) {
       return res.status(400).json({
         success: false,
         message: "All fields are required"
+      });
+    }
+
+    if (!isVerify) {
+      return res.status(400).json({
+        success: false,
+        message: "User is not verify"
       });
     }
 
@@ -37,7 +44,8 @@ export const addUser = async (req, res) => {
       username,
       fullname,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      isVerify:true
     });
 
     return res.status(201).json({
@@ -53,7 +61,6 @@ export const addUser = async (req, res) => {
   } catch (error) {
     console.error("Add user error:", error);
 
-    // 🔹 Duplicate key fallback
     if (error.code === 11000) {
       return res.status(409).json({
         success: false,
