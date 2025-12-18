@@ -13,12 +13,18 @@ export const loginUser = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email }).select("+password");
+    const user = await User.findOne({ email }).select("+password +isVerify");;
 
     if (!user) {
       return res.status(401).json({
         success: false,
         message: "Invalid email or password"
+      });
+    }
+    if (!user.isVerify) {
+      return res.status(401).json({
+        success: false,
+        message: "User is not verify Please Verify the user"
       });
     }
 
@@ -41,6 +47,12 @@ export const loginUser = async (req, res) => {
     );
 
     const token="Bearer "+accessToken
+
+    await User.findOneAndUpdate(
+      { email: req.body.email },
+      { isActive: true },
+      { new: true }
+    );
 
     return res.status(200).json({
       success: true,

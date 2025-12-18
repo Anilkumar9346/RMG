@@ -72,6 +72,7 @@ export const resourceSchema = new mongoose.Schema(
 
     contractToHire: {
       type: String,
+      enum:["Yes", "No", "yes", "no"],
       required: true,
       trim: true
     },
