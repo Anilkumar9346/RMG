@@ -27,8 +27,8 @@ app.use(express.json());
 app.use("/api/authUser",authRouter)
 
 // resourceRouter
-// app.use("/api/resource",resourceRouter);
-app.use("/api/resource",authenticate,authorizeRoles("ADMIN", "SALES_MANAGER","HR"), resourceRouter);
+app.use("/api/resource",authenticate,resourceRouter);
+// app.use("/api/resource",authenticate,authorizeRoles("ADMIN", "SALES_MANAGER","HR"), resourceRouter);
 
 //commentRouter
 app.use("/api/comment",authenticate, commentRouter);
