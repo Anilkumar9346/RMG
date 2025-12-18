@@ -84,6 +84,9 @@ export const addResourceValidator = [
   body("demandBudgetInfo.demandBudgetNote")
     .optional(),
 
+  body("demandBudgetInfo.paymentConformation")
+    .notEmpty().withMessage("Payment Confirmation is required"),
+
   //Demand Interview Details Validation
   body("demandInterviewDetails.modeOfInterview")
     .optional(),
@@ -99,9 +102,6 @@ export const addResourceValidator = [
 
   body("demandInterviewDetails.contractToHire")
     .notEmpty().withMessage("Contract To Hire is required"),
-
-  body("demandInterviewDetails.paymentConfirmation")
-    .notEmpty().withMessage("Payment Confirmation is required"),
 
   body("demandInterviewDetails.requirementResource")
     .notEmpty().withMessage("Requirement Resource is required"),

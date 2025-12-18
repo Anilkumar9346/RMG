@@ -11,6 +11,7 @@ import {ContractDetails} from '../../../models/resourceModel/resourceSchemas/con
 import {DemandDuration} from '../../../models/resourceModel/resourceSchemas/demandDurationModel/models/model.js'
 
 import {DemandBudget} from '../../../models/resourceModel/resourceSchemas/demandBudgetModel/models/model.js'
+import { storeConfortmationPDF } from '../../cloudController/paymentConformationPDF.js'
 
 // creating rerource 
 
@@ -166,6 +167,13 @@ const createContractDetails = async (contractData) => {
 // Demand Budget 
 const createDemandBudget = async (budgetData) => {
   try {
+    if (budgetData.paymentConformationDocumentPath!="") {
+      const pdfBuffer = req.file.buffer;
+      console.log(pdfBuffer)
+      // const store=storeConfortmationPDF(pdfBuffer)
+      // console.log(store)
+
+    }
     const demandBudgetId = generateRandomId(budgetData.budgetType);
 
     const demandBudgetDoc = new DemandBudget({

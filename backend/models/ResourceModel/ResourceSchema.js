@@ -77,12 +77,6 @@ export const resourceSchema = new mongoose.Schema(
       trim: true
     },
 
-    paymentConfirmation: {
-      type: String,
-      required: true,
-      trim: true
-    },
-
     requirementResource: {
       type: String,
       required: true,
