@@ -10,6 +10,7 @@ import { passwordUpdate } from "../controllers/authController/updateUserControll
 import { logoutUser } from "../controllers/authController/updateUserController/inActiveUser.controller.js";
 import { verifyOTP } from "../controllers/authController/mailController/verifyOTP.controller.js";
 import { checkUsername } from "../controllers/authController/addUserController/checkUsername.controller.js";
+import { authCheck } from "../controllers/authController/authUserController.js/authCheck.js";
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router.post('/getUser',loginUser)
 
 router.get('/checkUsername',checkUsername)
 
-// router.post('/authozied_user',authenticate)
+router.post('/authozied_user',authCheck)
 
 router.get('/get-all-User',getAllUser)
 router.delete('/delete-User/:id',deleteUser)
