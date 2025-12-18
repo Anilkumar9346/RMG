@@ -9,12 +9,15 @@ import { updateUser } from "../controllers/authController/updateUserController/u
 import { passwordUpdate } from "../controllers/authController/updateUserController/passwordUpdate.controller.js";
 import { logoutUser } from "../controllers/authController/updateUserController/inActiveUser.controller.js";
 import { verifyOTP } from "../controllers/authController/mailController/verifyOTP.controller.js";
+import { checkUsername } from "../controllers/authController/addUserController/checkUsername.controller.js";
 
 const router = express.Router();
 
 router.post('/addUser',addUser)
 
-router.get('/getUser',loginUser)
+router.post('/getUser',loginUser)
+
+router.get('/checkUsername',checkUsername)
 
 // router.post('/authozied_user',authenticate)
 
