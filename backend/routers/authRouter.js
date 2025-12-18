@@ -8,6 +8,7 @@ import { sendOTP } from "../controllers/authController/mailController/sendOTP.co
 import { updateUser } from "../controllers/authController/updateUserController/updateUser.controller.js";
 import { passwordUpdate } from "../controllers/authController/updateUserController/passwordUpdate.controller.js";
 import { logoutUser } from "../controllers/authController/updateUserController/inActiveUser.controller.js";
+import { verifyOTP } from "../controllers/authController/mailController/verifyOTP.controller.js";
 
 const router = express.Router();
 
@@ -28,5 +29,6 @@ router.put("/updatePassword",passwordUpdate)
 //otp sender
 
 router.post('/get-OTP',sendOTP)
+router.post('/verify-OTP',verifyOTP)
 
 export const authRouter = router;
