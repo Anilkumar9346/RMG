@@ -49,14 +49,14 @@ export const contractDetailsSchema = new mongoose.Schema(
     },
 
     isBGVRequired: {
-      type: Boolean,
+      type: String,
       enum: ["Yes", "No", "yes", "no"],
       required: true,
       trim: true
     },
 
     clientBGV_Verify: {
-      type: Boolean,
+      type: String,
       enum: ["Yes", "No", "yes", "no"],
       required: true,
       trim: true
