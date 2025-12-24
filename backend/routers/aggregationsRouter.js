@@ -1,14 +1,14 @@
 import express from "express"
 
-import { dashboardStatsController, getAggregatedData } from "../controllers/aggregationController/getAggregation.controller.js";
+import { dashboardStatsController, getAggregatedData , getFlowChartData } from "../controllers/aggregationController/getAggregation.controller.js";
 
 const router = express.Router();
 
-router.get("/demand/status-created-on", getAggregatedData);
+router.get("/get-created-on-status-table-data", getAggregatedData);
 
-router.get("/demand/new-requirement", dashboardStatsController);
+router.get("/get-dashboard-stats", dashboardStatsController);
 
-router.get("/resource/location-distribution", getAggregatedData);
+router.get("/get-flow-chart-data", getFlowChartData);
 
 router.get("/resource/source-distribution", getAggregatedData);
 

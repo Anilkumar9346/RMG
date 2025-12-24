@@ -1005,4 +1005,160 @@ const dashboardStatsController = async (req, res) => {
   }
 };
 
-export { getAggregatedData, dashboardStatsController };
+const getFlowChartData = async (req, res) => {
+  console.log("Get Flow Chart Data Called");
+  try {
+    // Your aggregation logic here
+  const result = await Resource.aggregate([
+  /* 0️⃣ Filter last 6 months */
+  {
+    $match: {
+      createdAt: {
+        $gte: new Date(new Date().setMonth(new Date().getMonth() - 6))
+      }
+    }
+  },
+
+  /* 1️⃣ Lookup demand info */
+  {
+    $lookup: {
+      from: "resourcedemandinfos",
+      localField: "resourceDemandInfoId",
+      foreignField: "_id",
+      as: "demandInfo"
+    }
+  },
+  { $unwind: "$demandInfo" },
+
+  /* 2️⃣ Lookup resumes */
+  {
+    $lookup: {
+      from: "resumes",
+      localField: "_id",
+      foreignField: "resourceModelId",
+      as: "resumes"
+    }
+  },
+
+  /* 3️⃣ Extract month number */
+  {
+    $addFields: {
+      monthNumber: { $month: "$createdAt" }
+    }
+  },
+
+  /* 4️⃣ Group by month */
+  {
+    $group: {
+      _id: "$monthNumber",
+
+      Added: {
+        $sum: { $ifNull: ["$demandInfo.noOfResource", 0] }
+      },
+
+      Pending: {
+        $sum: {
+          $size: {
+            $filter: {
+              input: "$resumes",
+              as: "resumes",
+              cond: { $eq: ["$$resumes.resumeStatus", "Pending"] }
+            }
+          }
+        }
+      },
+
+      Fulfilled: {
+        $sum: {
+          $size: {
+            $filter: {
+              input: "$resumes",
+              as: "resumes",
+              cond: { $eq: ["$$resumes.resumeStatus", "Fullfilled"] }
+            }
+          }
+        }
+      },
+
+      "Kept on hold": {
+        $sum: {
+          $size: {
+            $filter: {
+              input: "$resumes",
+              as: "resumes",
+              cond: { $eq: ["$$resumes.resumeStatus", "Hold"] }
+            }
+          }
+        }
+      },
+
+      "Inactive Closed": {
+        $sum: {
+          $size: {
+            $filter: {
+              input: "$resumes",
+              as: "resumes",
+              cond: { $eq: ["$$resumes.resumeStatus", "Rejected"] }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  /* 5️⃣ Derived field */
+  {
+    $addFields: {
+      "Could Not fulfill": {
+        $subtract: ["$Added", "$Fulfilled"]
+      }
+    }
+  },
+
+  /* 6️⃣ Sort chronologically */
+  {
+    $sort: { "_id": 1 }
+  },
+
+  /* 7️⃣ Convert month number → month name */
+  {
+    $addFields: {
+      month: {
+        $arrayElemAt: [
+          ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          "$_id"
+        ]
+      }
+    }
+  },
+
+  /* 8️⃣ Final output */
+  {
+    $project: {
+      _id: 0,
+      month: 1,
+      Added: 1,
+      Pending: 1,
+      Fulfilled: 1,
+      "Kept on hold": 1,
+      "Inactive Closed": 1,
+      "Could Not fulfill": 1
+    }
+  }
+  ]);
+
+
+    res.status(200).json({
+      success: true,
+      data: result, // Replace with actual data
+    });
+  } catch (error) {
+    console.error("Flow Chart Data Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server Error fetching flow chart data",
+    });
+  }
+};
+export { getAggregatedData, dashboardStatsController , getFlowChartData };

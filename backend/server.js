@@ -37,8 +37,8 @@ app.use("/api/resource"  ,resourceRouter);
 //commentRouter
 app.use("/api/comment",authenticate, commentRouter);
 
-//aggregationRouter
-app.use("/api/aggregation" , aggregationsRouter);
+//analyticsRouter
+app.use("/api/analytics" , aggregationsRouter);
 
 //resumeRouter
 app.use("/api/resume", candidatesResumesRouter);
