@@ -22,9 +22,6 @@ export const resourceSchema = new mongoose.Schema(
       trim: true
     },
   
-
-
-
     demandDurationId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "DemandDuration",
@@ -95,8 +92,15 @@ export const resourceSchema = new mongoose.Schema(
     resourceStatus: {
       type: String,
       required: true,
+      default: " Not Started",
       trim: true
     },
+
+    resumesOfThisResource:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Resume",
+      trim: true
+    }]
     
 },{ timestamps: true }
 );

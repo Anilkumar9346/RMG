@@ -2,6 +2,7 @@ import { Resource } from "../../../models/resourceModel/resourceModel.js";
 import mongoose from "mongoose";
 
 export const getAllResources = async (req, res) => {
+  console.log("Get All Resources Controller Called");
   try {
     const resources = await Resource.find()
       .populate({
@@ -23,7 +24,8 @@ export const getAllResources = async (req, res) => {
       })
       .populate("contractDetailsId")
       .populate("demandBudgetId")
-      .populate("demandDurationId");
+      .populate("demandDurationId")
+      .populate("resumesOfThisResource");
 
     if (!resources || resources.length === 0) {
       return res.status(204).send();
@@ -74,7 +76,8 @@ export const getSingleResources = async (req, res) => {
       })
       .populate("contractDetailsId")
       .populate("demandBudgetId")
-      .populate("demandDurationId");
+      .populate("demandDurationId")
+      .populate("resumesOfThisResource");
 
     if (!resources || resources.length === 0) {
       return res.status(404).json({

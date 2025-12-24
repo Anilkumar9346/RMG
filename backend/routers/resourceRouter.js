@@ -8,6 +8,13 @@ import { deleteSingleResources } from "../controllers/resourceController/deleteR
 import { updateResource } from "../controllers/resourceController/updateResource/updateResource.controller.js";
 import { addDemandSubTech, addDemandTech } from "../controllers/resourceController/demandTechnology/addDemandTech.controller.js";
 import { getDemandSubTech, getDemandTech } from "../controllers/resourceController/demandTechnology/getDemandTech.controller.js";
+import { addResume } from "../controllers/resumeController/addResume.controller.js";
+
+import multer from "multer";
+
+const upload = multer({
+  storage: multer.memoryStorage()
+});
 
 const router = express.Router();
 
@@ -27,6 +34,9 @@ router.get("/add-demandTech", getDemandTech);
 
 router.post("/add-sub-demandTech", addDemandSubTech);
 router.get("/add-sub-demandTech/:techId", getDemandSubTech);
+
+//
+router.post("/add-resume", addResume);
 
 
 export const resourceRouter = router;

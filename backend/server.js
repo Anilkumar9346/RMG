@@ -8,7 +8,11 @@ import { errorHandler } from "./controllers/errorController/errorHandler.js";
 import { commentRouter } from "./routers/commentRouter.js";
 import { authRouter } from "./routers/authRouter.js";
 import { authenticate } from "./controllers/authController/authUserController.js/authorization.controller.js";
+import { aggregationsRouter } from "./routers/aggregationsRouter.js";
+import { candidatesResumesRouter } from "./routers/candidatesResumesRouter.js";
+import { addResourceValidator } from "./validators/resource.validator.js";
 import { authorizeRoles } from "./controllers/authController/authUserController.js/authorizeRole.middleware.js";
+import { validate } from "./middlewares/validate.middleware.js";
 dotenv.config();
 
 const app = express();
@@ -27,20 +31,24 @@ app.use(express.json());
 app.use("/api/authUser",authRouter)
 
 // resourceRouter
-app.use("/api/resource",authenticate,resourceRouter);
+app.use("/api/resource"  ,resourceRouter);
 // app.use("/api/resource",authenticate,authorizeRoles("ADMIN", "SALES_MANAGER","HR"), resourceRouter);
 
 //commentRouter
 app.use("/api/comment",authenticate, commentRouter);
 
+//aggregationRouter
+app.use("/api/aggregation" , aggregationsRouter);
 
+//resumeRouter
+app.use("/api/resume", candidatesResumesRouter);
 //errorRouter
 app.use(notFound);
 app.use(errorHandler);
 
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT 
 
-app.listen(PORT, () => {
+app.listen(PORT, () => { 
   console.log(`Server running on port ${PORT}`);
-});
+}); 
