@@ -44,7 +44,10 @@ export const resumeSchema = new mongoose.Schema(
       required:true
     },
     resumeSource:{
-      type:String
+      type:String,
+      default:"Internal",
+      required:true,
+      enum:["Direct", "Referral", "Job Portal", "Social Media", "Recruitment Agency", "Internal" ,"External"]
     },
     candidateCurrentCTC:{
       type:String,
@@ -54,11 +57,11 @@ export const resumeSchema = new mongoose.Schema(
       type:String,
       required:true
     },
-  candidateStatusTimeline: {
-    type: [String],
-    enum: ["Screening_Scheduled","Interview_Scheduled","Interview_Cleared","HR_Cleared","Offered","Accepted","Onboarded","Rejected","Hold"],
-    default: ["Screening_Scheduled"]
-  }
+    candidateStatusTimeline: {
+      type: [String],
+      enum: ["Screening_Scheduled","Interview_Scheduled","Interview_Cleared","HR_Cleared","Offered","Accepted","Onboarded","Rejected","Hold"],
+      default: ["Screening_Scheduled"]
+    }
 
 
 },{ timestamps: true }
