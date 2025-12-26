@@ -10,23 +10,59 @@ export const resumeSchema = new mongoose.Schema(
 
     recruterId:{
       type:String,
-      required:true
+      required:true,
     },
 
     resumeRefName:{
       type:String,
-      required:true
+      required:true,
+      default:'Anil-Resume'
     },
 
     resumeRefPath:{
       type:String,
-      required:true
+      required:true,
+      unique:true
     },
 
     resumeStatus:{
       type:String,
+      enum:["Pending", "Fullfilled", "Hold", "Rejected"]
+    },
+    candidateName:{
+      type:String,
       required:true
+    },
+
+    candidateEmail:{
+      type:String,
+      required:true
+    },
+
+    candidateExperience:{ 
+      type:Number,
+      required:true
+    },
+    resumeSource:{
+      type:String,
+      default:"Internal",
+      required:true,
+      enum:["Direct", "Referral", "Job Portal", "Social Media", "Recruitment Agency", "Internal" ,"External"]
+    },
+    candidateCurrentCTC:{
+      type:String,
+      required:true
+    },
+    candidateExpectedCTC:{
+      type:String,
+      required:true
+    },
+    candidateStatusTimeline: {
+      type: [String],
+      enum: ["Screening_Scheduled","Interview_Scheduled","Interview_Cleared","HR_Cleared","Offered","Accepted","Onboarded","Rejected","Hold"],
+      default: ["Screening_Scheduled"]
     }
+
 
 },{ timestamps: true }
 );

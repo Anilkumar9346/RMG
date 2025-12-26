@@ -4,7 +4,6 @@ import {Client, Lead, ResourceDemandInfo} from  '../../../models/resourceModel/r
 import {DemandTechnology} from  '../../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 import {DemandSubTechnology} from  '../../../models/resourceModel/resourceSchemas/resourceDemandInfoModel/models/model.js'
 
-
 //import {WorkingLocation} from '../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 import {ContractDetails} from '../../../models/resourceModel/resourceSchemas/contractDetailsModel/models/model.js'
 
@@ -15,7 +14,7 @@ import { storeConfortmationPDF } from '../../cloudController/paymentConformation
 
 // creating rerource 
 
-const generateRandomId = (data) => {
+const generateRandomId =  (data) => {
   const now = new Date();
 
   const dataPart = data
@@ -132,19 +131,19 @@ const createDemandSubTechnology = async ( subTechnologyName, demandTechnologyId 
 // Resource Demand Info 
 const createResourceDemandInfo = async ( resourceDemandData, demandTechnology, demandSubTechnology, lead ) => {
   try {
-    const resourceInfoId = generateRandomId("RIN");
-
+    const resourceInfoId =  generateRandomId("RIN");
+    console.log("Resource Info ID:", resourceInfoId);
     const resourceDemandInfoDoc = new ResourceDemandInfo({
       ...resourceDemandData,
       demandTechnology,
       demandSubTechnology,
       leadId: lead,
-      resourceInfoId,
-    });
-
+      resourceInfoId,  
+    }); 
+    console.log("Resource Demand Info Doc:", resourceDemandInfoDoc);
     return await resourceDemandInfoDoc.save();
   } catch (error) {
-    console.log(error);
+    console.log("error occured while saving  resourceDemandInfo" , error);
   }
 };
 
@@ -165,7 +164,7 @@ const createContractDetails = async (contractData) => {
 };
 
 // Demand Budget 
-const createDemandBudget = async (budgetData) => {
+const createDemandBudget = async (req,budgetData) => {
   try {
     if (budgetData.paymentConformationDocumentPath!="") {
       const pdfBuffer = req.file.buffer;
@@ -265,7 +264,7 @@ export const addResourceController = async (req, res) => {
     );
 
     const contractDetailsDoc = await createContractDetails(contractDetails);
-    const demandBudgetDoc = await createDemandBudget(demandBudgetInfo);
+    const demandBudgetDoc = await createDemandBudget(req,demandBudgetInfo);
     const demandDurationDoc = await createDemandDuration(demandDurationInfo);
 
     const resource = await createResource(
